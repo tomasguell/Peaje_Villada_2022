@@ -8,7 +8,7 @@ Mono, Nachoreedus, Guell, Facu
 #PARA CREAR UN NUEVO REQUIREMENTS : pip3 freeze > requirements.txt
 
 
-#PARA PASAR NUEVAS LIBRERIAS INSTALADAS AL REQUIREMENTS : pip install -r requirements. txt  !IMPORTANTE! correr este comando siempre que instales una nueva libreria
+#PARA PASAR NUEVAS LIBRERIAS INSTALADAS AL REQUIREMENTS : pip install -r requirements.txt  !IMPORTANTE! correr este comando siempre que instales una nueva libreria
 
 
 #COMO ALTERNATIVA, TAMBIEN SE PUEDE USAR pipenv sync PARA INSTALAR LAS LIBRERIAS EN EL PIPFILE.LOCK

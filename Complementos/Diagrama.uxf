@@ -4,15 +4,15 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>747</x>
-      <y>171</y>
-      <w>90</w>
+      <x>702</x>
+      <y>126</y>
+      <w>126</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>Estaciones
 --
--id: int
--ruta: str
+-idEstacion: int
+-ruta: ruta
 -km: str
 -nombre: str
 
@@ -23,31 +23,31 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>666</x>
-      <y>324</y>
+      <x>657</x>
+      <y>261</y>
       <w>153</w>
       <h>63</h>
     </coordinates>
     <panel_attributes>Casillas
 --
 -IdCasilla: int
--IdEstacion: Foreing
+-IdEstacion: Estaciones
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>180</y>
-      <w>171</w>
+      <x>27</x>
+      <y>126</y>
+      <w>234</w>
       <h>144</h>
     </coordinates>
     <panel_attributes>Operadores
 --
 -NumeroEmpleado: str
--tipoDocumento: foreing
--documento: str
+-tipoDocumento: TipoDocumento
+-bumeroDocumento: string
 -nombre: str
 -apellido: str
 </panel_attributes>
@@ -56,23 +56,21 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>432</x>
-      <y>162</y>
-      <w>144</w>
-      <h>180</h>
+      <x>315</x>
+      <y>153</y>
+      <w>279</w>
+      <h>162</h>
     </coordinates>
     <panel_attributes>Turnos
 --
 -id: int
--diaComienzo: date
--diaFin: date
--horaComienzo: time
--horaFin: time
--sentido: str
+-FechaHoraComienzo: date-time
+-FechaHoraFin: date-time
+-sentido: str(2)
 -dineroInicial: int
--casilla: foreing
-
-</panel_attributes>
+-casilla: casillas
+-fechaHoraPlanificadaComienzo:date-time
+-fechaHoraPlanificadaFin:date-time</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -81,31 +79,30 @@
       <x>405</x>
       <y>387</y>
       <w>189</w>
-      <h>126</h>
+      <h>108</h>
     </coordinates>
-    <panel_attributes>Peaje
+    <panel_attributes>Ticket
 --
 -id: int
--tipoVehiculo: foreing
--numeroCasilla: foreing 
+-tipoVehiculo: TipoVehiculo
 -fecha: date
 -hora: time
--numeroTurno: foreing
+-importe:int
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>36</x>
-      <y>387</y>
+      <x>63</x>
+      <y>333</y>
       <w>171</w>
       <h>81</h>
     </coordinates>
     <panel_attributes>TipoDocumento
 --
 -id: int
--tipo: str
+-tipo: str(5)
 -descrpcion: str</panel_attributes>
     <additional_attributes/>
   </element>
@@ -113,7 +110,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>432</x>
-      <y>576</y>
+      <y>549</y>
       <w>153</w>
       <h>90</h>
     </coordinates>
@@ -126,107 +123,103 @@
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>738</x>
-      <y>225</y>
-      <w>27</w>
-      <h>117</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>585</x>
-      <y>351</y>
-      <w>99</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;40.0;90.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>495</x>
-      <y>333</y>
-      <w>27</w>
-      <h>72</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>162</x>
-      <y>171</y>
-      <w>72</w>
-      <h>72</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>60.0;60.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>216</x>
-      <y>207</y>
-      <w>135</w>
-      <h>90</h>
+      <x>549</x>
+      <y>0</y>
+      <w>144</w>
+      <h>72</h>
     </coordinates>
-    <panel_attributes>OperadorTurno
+    <panel_attributes>Rutas
 --
 -id: int
--idTurno: foreing
--idOperador: foreing
--descripcion:str</panel_attributes>
+-Nombre:str
+-descripcion: str
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>342</x>
-      <y>207</y>
-      <w>108</w>
-      <h>36</h>
+      <x>684</x>
+      <y>63</y>
+      <w>81</w>
+      <h>81</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;20.0;100.0;10.0</additional_attributes>
+    <panel_attributes>lt=&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;70.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>90</x>
-      <y>315</y>
-      <w>27</w>
-      <h>90</h>
+      <x>711</x>
+      <y>207</y>
+      <w>54</w>
+      <h>72</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+    <panel_attributes>lt=&lt;-
+m1=1..*</panel_attributes>
+    <additional_attributes>10.0;60.0;30.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>495</x>
-      <y>504</y>
-      <w>27</w>
-      <h>90</h>
+      <y>486</y>
+      <w>45</w>
+      <h>81</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+    <panel_attributes>lt=&lt;-
+m1=1..*</panel_attributes>
+    <additional_attributes>10.0;70.0;20.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>567</x>
-      <y>234</y>
-      <w>117</w>
-      <h>108</h>
+      <x>135</x>
+      <y>261</y>
+      <w>36</w>
+      <h>90</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;110.0;100.0</additional_attributes>
+    <panel_attributes>lt=&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>10.0;80.0;20.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>486</x>
+      <y>306</y>
+      <w>45</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1..*</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>585</x>
+      <y>243</y>
+      <w>90</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1..*</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>252</x>
+      <y>162</y>
+      <w>81</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1..*</panel_attributes>
+    <additional_attributes>70.0;40.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
