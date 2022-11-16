@@ -5,6 +5,11 @@ from django.db import models
 from .tipoDocumento import documento
 from .sentido import sentido
 from .tipoVehiculo import tipo
+from .horarios import horario
+
+import datetime
+
+
 
 # Create your models here.
 class TipoDocumento(models.Model):
@@ -56,11 +61,9 @@ class ticket(models.Model):
         return (f'{self.fecha} - {self.hora}') 
 
 class turnos(models.Model):
-    FechaHoraComienzo= models.DateTimeField()
-    FechaHoraFin= models.DateTimeField()
+    FechaComienzo=models.DateField(auto_now_add=True, null=False, blank=False)
     dineroInicial= models.IntegerField()
     sentidoCirculacion=models.CharField(max_length=10,choices=sentido,default='este-oeste' )
-    FechaHoraPlanificadaComienzo= models.DateTimeField()
-    FechaHoraPlanificadaFin=models.DateTimeField()
+    HoraPlanificadacomienzo=models.CharField(max_length=14,choices=horario,default='00:00 - 08:00' )
     casilla= models.ForeignKey(casillas,on_delete=models.CASCADE)
     
