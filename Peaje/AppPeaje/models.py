@@ -6,10 +6,7 @@ from .tipoDocumento import documento
 from .sentido import sentido
 from .tipoVehiculo import tipo
 from .horarios import horario
-
-import datetime
-
-
+from django.utils import timezone
 
 # Create your models here.
 class TipoDocumento(models.Model):
