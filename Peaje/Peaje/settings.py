@@ -150,7 +150,7 @@ JAZZMIN_SETTINGS = {
     "site_icon": None,
 
     # Welcome text on the login screen
-    "welcome_sign": "BIENVENIDO AL ADMINISTRADOR ",
+    "welcome_sign": "BIENVENIDO ",
 
     # Copyright on the footer
     "copyright": "Acme Peaje Ltd",

@@ -29,6 +29,5 @@ class TicketAdmin(admin.ModelAdmin):
     list_filter=('importe','fecha','hota','tipoVehiculo')
 admin.site.register(ticket)
 
-
 admin.site.register(turnos)
 

@@ -61,8 +61,10 @@ class ticket(models.Model):
         return (f'{self.fecha} - {self.hora}') 
 
 class turnos(models.Model):
-    FechaComienzo=models.DateField(auto_now_add=True, null=False, blank=False)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
     dineroInicial= models.IntegerField()
     sentidoCirculacion=models.CharField(max_length=10,choices=sentido,default='este-oeste' )
     HoraPlanificadacomienzo=models.CharField(max_length=14,choices=horario,default='00:00 - 08:00' )
     casilla= models.ForeignKey(casillas,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.fecha_creacion
