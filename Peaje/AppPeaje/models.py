@@ -66,4 +66,3 @@ class turnos(models.Model):
     sentidoCirculacion=models.CharField(max_length=10,choices=sentido,default='este-oeste' )
     HoraPlanificadacomienzo=models.CharField(max_length=14,choices=horario,default='00:00 - 08:00' )
     casilla= models.ForeignKey(casillas,on_delete=models.CASCADE)
-    
