@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "crispy_forms",
     "AppPeaje",
+    "register",
 ]
 
 MIDDLEWARE = [
@@ -260,3 +262,6 @@ JAZZMIN_SETTINGS = {
     "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs"},
     
 }
+
+
+CRISPY_TEMPLATE_PACK="bootstrap4"
