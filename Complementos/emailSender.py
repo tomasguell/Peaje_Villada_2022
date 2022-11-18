@@ -5,23 +5,47 @@
 import pandas as pd
 import smtplib
 from email.message import EmailMessage
-import test
+# Importing all the necessary requirements
+from smtplib import SMTP
 
-uploaded = test.upload()
 
 
-sender = 'SENDEREMAIL'
-password = 'yourpassword'
+
+
+sender = 'peajevillada@gmail.com'
+password = 'dibu1234'
+reciever_mail = 'frangiayetto@gmail.com'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 count = 1
 
-receiver = emails[i][0]
+receiver = reciever_mail
 msg = EmailMessage()
-msg['Subject'] = 'Course Book - GMF Unicamp'
+msg['Subject'] = 'TESTING SUBJECT LOLOL'
 msg['From'] = sender
 msg['To'] = receiver
-msg.set_content('Good Night, \n Here it is your course book from our investment course. \n Att, \n Team GMF')
-file = pdf_file[i][0]
+msg.set_content('TESTING 123 TESTING TESTING LA MAMA DE MONO EN 4 TESTING')
+file = 'Complementos/test.pdf'
 with open(file,'rb') as f:
     file_data = f.read()
     file_name = f.name
