@@ -150,7 +150,7 @@ JAZZMIN_SETTINGS = {
     "site_icon": None,
 
     # Welcome text on the login screen
-    "welcome_sign": "BIENVENIDO AL ADMINISTRADOR ",
+    "welcome_sign": "BIENVENIDO ",
 
     # Copyright on the footer
     "copyright": "Acme Peaje Ltd",
@@ -172,7 +172,7 @@ JAZZMIN_SETTINGS = {
         {"name": "Inicio",  "url": "admin:index", "permissions": ["auth.view_user"]},
 
         # external url that opens in a new window (Permissions can be added)
-        {"name": "Ayuda", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+        {"name": "Ayuda", "url": "https://github.com/tomasguell/Peaje_Villada_2022", "new_window": True},
 
         # model admin to link to (Permissions checked against model)
         {"model": "auth.User"},

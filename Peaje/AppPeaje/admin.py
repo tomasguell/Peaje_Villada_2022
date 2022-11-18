@@ -25,10 +25,9 @@ admin.site.register(casillas)
 admin.site.register(tipoVehiculo)
 
 class TicketAdmin(admin.ModelAdmin):
-    list_display =['importe','fecha','hora','tipoVehiculo'] 
-    list_filter=('importe','fecha','hota','tipoVehiculo')
-admin.site.register(ticket)
-
+    list_display =['fecha','hora','tipoVehiculo','importe'] 
+    list_filter=('fecha','hora','tipoVehiculo','importe')
+admin.site.register(ticket, TicketAdmin)
 
 admin.site.register(turnos)
 
