@@ -1,0 +1,8 @@
+p{
+    color: rgb(124, 252, 12);
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 80%;
+}
