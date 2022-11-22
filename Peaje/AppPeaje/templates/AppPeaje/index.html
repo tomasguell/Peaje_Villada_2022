@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 {% extends "AppPeaje\base.html" %}
-{% block content %}
+{% block div_content %}
     <ul>
         <li><a href="#">London</a></li>
         <li><a href="#">Paris</a></li>
         <li><a href="#">Tokyo</a></li>
+        <li>
+            <article>
+                <ul>
+                    <li>
+                        <h1>London</h1>
+                    </li>
+                    <li>
+                        <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
+                    </li>
+                    <li>
+                        <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+                    </li>
+                </ul>
+            </article>
+        </li>
+        <li><strong>key:</strong> {{ key }}</li>
     </ul>
-
-    <article>
-    <h1>London</h1>
-    <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
-    <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
-    </article>
-    <li><strong>key:</strong> {{ key }}</li>
 {% endblock %}
