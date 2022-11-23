@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
     {% load static %}
@@ -42,6 +42,18 @@
                 <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-app-indicator"></i> Notifications</a></li>
             </ul>
 
+            {% if user.is_authenticated %}
+            <hr class="h-color mx-3 ">
+            <ul class="list-unstyled px-2">
+                <li class=""><a href="{% url 'logout' %}" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-app-indicator"></i>Logout</a></li>
+            </ul>         
+            {% else %}
+            <hr class="h-color mx-3 ">
+            <ul class="list-unstyled px-2">        
+                <li class=""><a href="{% url 'login' %}" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-app-indicator"></i>Login</a></li>
+            </ul>
+            {% endif %}
+
         </div>
         <div class="content">
             {% block navbar %}
@@ -77,11 +89,12 @@
                 {% if user.is_authenticated %}
                     Hi {{ user.username }}!
                     {% block div_content %}
-                
+
                     {% endblock %}
+                    
                 {% else %}
                     <p>You are not logged in</p>
-                    <a href="{% url 'login' %}">Log In</a>
+                    
                     {% endif %}
                 
             </div>
