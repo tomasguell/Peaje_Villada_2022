@@ -11,152 +11,92 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'AppPeaje/css/style.css' %}">
 
-    <link rel="stylesheet" href="{% static 'AppPeaje/js/main.js' %}">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-
-    <!-- Font Awesome JS -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
     {% block title %}<title>Peaje</title>{% endblock title %}
 </head>
 <body>
-    <!--
-    {% block navbar %}
-    <div  class="container">
-        <nav class="navbar navbar-expand-lg bg-light">
-            <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Dropdown
+    <div class="main-container d-flex">
+        <div class="sidebar" id="side_nav">
+            <div class="header-box px-2 pt-3 pb-4 d-flex justify-content-between">
+                <h1 class="fs-4"><span class="bg-white text-dark rounded shadow px-2 me-2">CL</span><span class="text-white">Coding League</span></h1>
+                <button class="btn d-md-none d-block close-btn px-1 py-0 text-white"><i class="bi bi-list"></i></button>
+            </div>
+
+            <ul class="list-unstyled px-2">
+                <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-house-door"></i> Dashboard</a></li>
+                <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-list-ul"></i> Projects</a></li>
+                <li class="">
+                    <a href="#" class="text-decoration-none px-3 py-2 d-block d-flex justify-content-between"> 
+                        <span><i class="bi bi-chat"></i> Messages</span>
+                        <span class="bg-dark rounded-pill text-white py-0 px-2"> 02</span>
                     </a>
-                    <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
-                </li>
-                </ul>
-                <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
-            </div>
-        </nav>
-    </div>
-    {% endblock navbar %}
-    -->
-
-    <div class="wrapper">
-        <!-- Sidebar -->
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <h3>Bootstrap Sidebar</h3>
-            </div>
-    
-            <ul class="list-unstyled components">
-                <p>Dummy Heading</p>
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">Page 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Portfolio</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
+                <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-envelope-paper"></i> Services</a></li>
+                <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-people"></i> Customers</a></li>
             </ul>
-        </nav>
-        <div id="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+            <hr class="h-color mx-3 ">
+            <ul class="list-unstyled px-2">
+                <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-sliders"></i> Settings</a></li>
+                <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-app-indicator"></i> Notifications</a></li>
+            </ul>
+
+        </div>
+        <div class="content">
+            {% block navbar %}
+            <nav class="navbar navbar-expand-md navbar-light bg-light">
                 <div class="container-fluid">
-        
-                    <button type="button" id="sidebarCollapse" class="btn btn-info" onclick="myFunction()">
-                        <i class="fas fa-align-left"></i>
-                        <span>Toggle Sidebar</span>
+
+                    <div class="d-flex justify-content-between d-md-none d-block">
+                        <button class="btn px-1 py-0 open-btn me-2"><i class="bi bi-list-nested"></i></button>
+                            <a class="navbar-brand fs-4" href="#"><span class="bg-dark rounded px-2 py-0 text-white">CL</span></a>
+                    </div>
+                    <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-list-nested"></i>
                     </button>
-                    {% block div_content %}
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Profile</a>
+                            </li>
+                        </ul>
+                    </div>
 
-                    {% endblock %}
-        
                 </div>
+
             </nav>
+            {% endblock navbar %}
+            <div class="dashboard-content px-3 pt-4">
+                <h2 class="fs-5"> Dashboard</h2>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Qui ut, nesciunt obcaecati eaque quis, sint quam quaerat, corrupti incidunt ipsa atque officiis 
+                    necessitatibus magnam! Laboriosam blanditiis animi beatae voluptatem nulla?
+                </p>
+                {% block div_content %}
+
+                {% endblock %}
+            </div>
+
+            <div class="container">
+                <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                    <div class="col-md-4 d-flex align-items-center">
+                        <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                            <i class="bi bi-bootstrap-fill"></i>
+                        </a>
+                        <span class="mb-3 mb-md-0 text-muted">© 2022 Company, Inc</span>
+                    </div>
+                
+                    <ul class="nav col-md-4 justify-content-md-center list-unstyled d-flex">
+                        <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-twitter"></i></a></li>
+                        <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-facebook"></i></a></li>
+                        <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-instagram"></i></a></li>
+                    </ul>
+                </footer>
+            </div>
         </div>
-
     </div>
-
-    <!-- default content text (typically empty) 
-    <section class="container">
-        {% block content %}
-        
-        {% endblock %}
-    </section>
-    -->
-
-    {% block footer %}
-    <div class="container">
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <div class="col-md-4 d-flex align-items-center">
-            <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                <i class="bi bi-bootstrap-fill"></i>
-            </a>
-            <span class="mb-3 mb-md-0 text-muted">© 2022 Company, Inc</span>
-        </div>
-    
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-twitter"></i></a></li>
-            <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-facebook"></i></a></li>
-            <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-instagram"></i></a></li>
-        </ul>
-        </footer>
-    </div>
-    {% endblock footer %}
 
     <script src="{% static 'AppPeaje/js/main.js' %}"></script>
 
@@ -165,5 +105,21 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+
+    <script>
+
+        $(".sidebar ul li").on('click', function() {
+            $(".sidebar ul li.active").removeClass('active');
+            $(this).addClass('active');
+        });
+
+        $('.open-btn').on('click', function(){
+                $('.sidebar').addClass('active');
+        });
+
+        $('.close-btn').on('click', function(){
+                $('.sidebar').removeClass('active');
+        });
+    </script>
 </body>
 </html>
