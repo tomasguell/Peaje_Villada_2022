@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends "AppPeaje/base.html" %}
+{% block div_content %}
+    <h2 class="fs-3"> Dashboard</h2>
+
+    <div class="col-md-6 col-sm-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h5 class="m-0">Go to</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-sm">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="tickets/">Tickets</a>
+                            </td>
+                            <td>
+                                <div class="btn-group float-right">
+                                    <a href="tickets/" class="btn btn-sm btn-outline-success btn-flat addlink">Add</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">Turnos</a>
+                            </td>
+                            <td>
+                                <div class="btn-group float-right">
+                                    <a href="#" class="btn btn-sm btn-outline-success btn-flat addlink">Add</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <strong>key: {{ key }}</strong> 
+{% endblock %}
