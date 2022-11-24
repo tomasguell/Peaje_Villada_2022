@@ -11,6 +11,7 @@ Para resolver los problemas de esta empresa, nos propusimos crear un proyecto dj
 $ git clone https://github.com/tomasguell/Peaje_Villada_2022.git
 $ cd ../Peaje_Villada_2022
 $ pip install -r requirements.txt
+$ mysql
 $ CREATE USER 'bdi'@'localhost' IDENTIFIED BY 'pepe1234';
 $ mysql -ubdi -ppepe1234
 $ CREATE DATABASE Peaje;
