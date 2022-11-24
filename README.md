@@ -15,6 +15,8 @@ $ CREATE USER 'bdi'@'localhost' IDENTIFIED BY 'pepe1234';
 $ mysql -ubdi -ppepe1234
 $ CREATE DATABASE Peaje;
 $ cd ../Peaje_Villada_2022/AppPeaje
+$ python3 manage.py migrate
+$ python3 manage.py makemigrations
 $ python3 manage.py runserver
 
 ```
