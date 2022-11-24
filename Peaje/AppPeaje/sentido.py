@@ -1,6 +1,6 @@
 sentido={
-    ('E-O','este-oeste'),
-    ('O-E)', 'oeste-este'),
-    ('N-S','norte-sur'),
-    ('S-N','sur-norte',),
+    ('este-oeste','este-oeste'),
+    ('oeste-este', 'oeste-este'),
+    ('norte-sur','norte-sur'),
+    ('sur-norte','sur-norte',),
 }

@@ -1,6 +1,15 @@
 from django.contrib import admin
 from .models import *
 
+def cargarTicket():
+    #lista= 
+    for i in lista:
+        lista = ticket.objects.create(importe= i,fecha=i,hora=i,tipoVehiculo=i)
+def cargarTurno():
+    #lista= 
+    for i in lista:
+        lista = turnos.objects.create(fecha_creacion= i,dineroInicial=i,sentidoCirculacion=i,horaPlanificadaComienzo=i,casilla=i)
+
 
 # Register your models here.
 admin.site.site_header='PEAJE'
@@ -27,7 +36,10 @@ admin.site.register(tipoVehiculo)
 class TicketAdmin(admin.ModelAdmin):
     list_display =['fecha','hora','tipoVehiculo','importe'] 
     list_filter=('fecha','hora','tipoVehiculo','importe')
+    date_hierarchy = 'fecha'
 admin.site.register(ticket, TicketAdmin)
 
-admin.site.register(turnos)
+class TurnosAdmin(admin.ModelAdmin):
+    date_hierarchy = 'fecha_creacion'
+admin.site.register(turnos,TurnosAdmin)
 
