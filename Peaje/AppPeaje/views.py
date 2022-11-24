@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from .forms import NuevoTurno
 # Create your views here.
 
 def index(request):
@@ -10,4 +10,14 @@ def tickets(request):
     return render(request, 'AppPeaje/tickets.html')
 
 def turnos(request):
-    return render(request, 'AppPeaje/turnos.html')
+    if request.method == 'POST':
+        form = NuevoTurno(request.POST)
+        
+        if form.is_valid():
+            #PROCESAR LA INFORMACION
+            pass
+    else:
+        form = NuevoTurno()
+    
+    
+    return render(request, 'AppPeaje/turnos.html', {'form':form})

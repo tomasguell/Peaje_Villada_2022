@@ -40,7 +40,10 @@ class estaciones(models.Model):
         return self.nombre
 
 class casillas(models.Model):
+    
     estacion=models.ForeignKey(estaciones,on_delete=models.CASCADE)
+    
+
 
 class tipoVehiculo(models.Model):
     tipo=models.CharField(max_length=30,choices=tipo,default='' )
