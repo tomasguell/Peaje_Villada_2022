@@ -52,19 +52,22 @@ class tipoVehiculo(models.Model):
     def __str__(self) :
         return self.tipo
 
+class turnos(models.Model):
+    fecha_creacion = models.DateTimeField()
+    fecha_fin=models.DateTimeField()
+    dineroInicial= models.IntegerField()
+    sentidoCirculacion=models.CharField(max_length=10,choices=sentido,default='este-oeste' )
+    HoraPlanificada=models.CharField(max_length=14,choices=horario,default='00:00 - 08:00' )
+    casilla= models.ForeignKey(casillas,on_delete=models.CASCADE)
+    operador= models.ForeignKey(operadores,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.fecha_creacion
+
 class ticket(models.Model):
     importe=models.IntegerField()
     fecha= models.DateField()
     hora=models.TimeField()
     tipoVehiculo=models.ForeignKey(tipoVehiculo,on_delete=models.CASCADE)
+    turno= models.ForeignKey(turnos,on_delete=models.CASCADE)
     def __str__(self) :
         return (f'{self.fecha} - {self.hora}') 
-
-class turnos(models.Model):
-    fecha_creacion = models.DateTimeField(auto_now_add=True)
-    dineroInicial= models.IntegerField()
-    sentidoCirculacion=models.CharField(max_length=10,choices=sentido,default='este-oeste' )
-    HoraPlanificadacomienzo=models.CharField(max_length=14,choices=horario,default='00:00 - 08:00' )
-    casilla= models.ForeignKey(casillas,on_delete=models.CASCADE)
-    def __str__(self):
-        return self.fecha_creacion
