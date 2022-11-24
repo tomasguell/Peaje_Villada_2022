@@ -1,5 +1,5 @@
 documento={
-    ('Documento de identidad','DNI'),
+    ('DNI','DNI'),
     ('Pasaporte','Pasaporte'),
     ('CIF','CIF')
 }
