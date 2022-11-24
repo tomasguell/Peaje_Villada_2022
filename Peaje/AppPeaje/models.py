@@ -60,6 +60,7 @@ class turnos(models.Model):
     HoraPlanificada=models.CharField(max_length=14,choices=horario,default='00:00 - 08:00' )
     casilla= models.ForeignKey(casillas,on_delete=models.CASCADE)
     operador= models.ForeignKey(operadores,on_delete=models.CASCADE)
+    turno_activo = models.BooleanField(default=True)
     def __str__(self):
         return self.fecha_creacion
 
