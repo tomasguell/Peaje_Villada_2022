@@ -9,4 +9,5 @@ def index(request):
 def tickets(request):
     return render(request, 'AppPeaje/tickets.html')
 
-
+def turnos(request):
+    return render(request, 'AppPeaje/turnos.html')
