@@ -2,22 +2,18 @@
 {% extends "AppPeaje/base.html" %}
 {% block div_content %}
     <h2 class="fs-3"> Tickets</h2>
-    <form class="row row-cols-lg-auto g-3 align-items-center">
+    <form action="/tickets/" method="post" class="row row-cols-lg-auto g-3 align-items-center">
+        {% csrf_token %}
 
         <div class="col-12">
             <h5 class="fs-5"> Tipo de Vehiculo: </h5>
         </div>
 
         <div class="col-12">
-            <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
-            <select class="select">
-            {% for i in '0123456789'|make_list %}
-                <option value={{ forloop.counter }} >{{ forloop.counter }}</option>
-            {% endfor %}
-            </select>
+            {{ form.tipoVehiculo }}
         </div>
         <div class="col-12">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
 {% endblock %}
