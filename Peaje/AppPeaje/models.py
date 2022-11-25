@@ -7,6 +7,7 @@ from .sentido import sentido
 from .tipoVehiculo import tipo
 from .horarios import horario
 from django.utils import timezone
+from django.conf import settings
 
 # Create your models here.
 class TipoDocumento(models.Model):
@@ -16,6 +17,15 @@ class TipoDocumento(models.Model):
         return self.tipo
 
 
+"""
+class user(models.Model):
+    id
+    username
+    password
+
+"""
+
+
 
 class operadores(models.Model):
     numeroEmpleado=models.CharField(max_length=10)
@@ -23,6 +33,7 @@ class operadores(models.Model):
     nombre=models.CharField(max_length=30)
     apellido=models.CharField(max_length=30)
     tipoDocumento=models.ForeignKey(TipoDocumento,on_delete=models.CASCADE)
+    usuario =models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     def __str__(self):
         return (f'{self.nombre} - {self.apellido}')
 
