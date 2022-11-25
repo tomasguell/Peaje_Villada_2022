@@ -21,3 +21,5 @@ def turnos(request):
     
     
     return render(request, 'AppPeaje/turnos.html', {'form':form})
+def informe(request):
+    return render(request, 'AppPeaje/informe.html')
