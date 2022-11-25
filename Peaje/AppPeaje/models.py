@@ -58,7 +58,7 @@ class turnos(models.Model):
     casilla= models.ForeignKey(casillas,on_delete=models.CASCADE)
     operador= models.ForeignKey(operadores,on_delete=models.CASCADE)
     def __str__(self):
-        return self.fecha_creacion
+        return self.sentidoCirculacion
 
 class ticket(models.Model):
     importe=models.IntegerField()
