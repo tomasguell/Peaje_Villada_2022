@@ -15,7 +15,7 @@ def turnos(request):
         
         if form.is_valid():
             #PROCESAR LA INFORMACION
-            pass
+            print(form)
     else:
         form = NuevoTurno()
     
