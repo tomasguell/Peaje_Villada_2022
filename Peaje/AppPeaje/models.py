@@ -64,14 +64,14 @@ class tipoVehiculo(models.Model):
         return self.tipo
 
 class turnos(models.Model):
-    fecha_creacion = models.DateTimeField()
-    fecha_fin=models.DateTimeField(blank=True)
+    fecha_creacion = models.DateTimeField(null=True,blank=True)
+    fecha_fin=models.DateTimeField(null=True,blank=True)
     dineroInicial= models.IntegerField()
     sentidoCirculacion=models.CharField(max_length=10,choices=sentido,default='este-oeste' )
     HoraPlanificada=models.CharField(max_length=14,choices=horario,default='00:00 - 08:00' )
     turno_activo = models.BooleanField(default=True)
     casilla= models.ForeignKey(casillas,on_delete=models.CASCADE)
-    operador= models.ForeignKey(operadores,on_delete=models.CASCADE)
+    operador= models.ForeignKey(operadores,on_delete=models.CASCADE, null=True,blank=True)
     
     def __str__(self):
         return self.sentidoCirculacion

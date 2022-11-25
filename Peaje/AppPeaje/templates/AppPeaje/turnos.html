@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 {% extends "AppPeaje/base.html" %}
 {% block div_content %}
-    <h2 class="fs-3"> Registrar nuevo turno</h2>
-    <form action="" method="post" class="row row-cols-lg-auto g-3 align-items-center">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit" value="submit" class="btn btn-primary">Submit</button>    
-        
-    </form>
-{% endblock %}
+{% if activar_form == True %}
+    
+        <h2 class="fs-3"> Registrar nuevo turno</h2>
+        <form action="" method="post" class="row row-cols-lg-auto g-3 align-items-center">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" value="submit" class="btn btn-primary">Submit</button>    
+            
+        </form>
+    
+{% else %}
+   
+    <h2 class="fs-3"> Terminar Turno</h2>
+    <button type="submit" onclick= "location.href='{% url 'terminar_turno' %}'" class="btn btn-primary">Finalizar</button>    
+    
+
+{% endif %}    
+{% endblock %}       
 
