@@ -1,11 +1,12 @@
 from django.shortcuts import render, HttpResponseRedirect
 from .forms import NuevoTurno
 from datetime import datetime
-from .models import turnos, operadores
+from .models import *
 # Create your views here.
 from django.http import HttpResponseRedirect
 
 from .forms import NuevoTicket
+
 
 def index(request):
     context = {'key': 'hola'}
@@ -53,22 +54,23 @@ def cargar_turnos(request):
         form = NuevoTurno()
         
     
-<<<<<<< HEAD
     
     return render(request, 'AppPeaje/turnos.html', {'form':form})
+
 def informe(request):
+    #tickets= ticket.objects.all()
+    #estacion= estaciones.objects.values_list('nombre')
+    #for i in estacion:
+	    #montoEstacion= ticket.objects.values_list('importe').filter(turnos_casilla__estacion__nombre=i)
+        
+    #fecha= ticket.objects.values_list('fecha')
+    #for i in fecha:
+	    #montoFecha= ticket.objects.values_list('importe').filter(fecha=i)
     return render(request, 'AppPeaje/informe.html')
-=======
-    turnos_activos = turnos.objects.all().filter(turno_activo=True, operador__usuario = request.user)
-        
-    if len(turnos_activos) > 0:
-        
-        activar_form = False
-        
-    else:
-        activar_form = True        
-    return render(request, 'AppPeaje/turnos.html', {'form':form,
-                                                    'activar_form':activar_form})
+    
+	    
+
+	 
 
 def terminar_turno(request):
     turnos_activos = turnos.objects.all().filter(turno_activo=True, operador__usuario = request.user)
@@ -80,4 +82,3 @@ def terminar_turno(request):
     except IndexError:
         pass    
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
->>>>>>> fe7e031b14fbe873091708333fd79e75fd435b24
