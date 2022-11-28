@@ -75,6 +75,8 @@ class turnos(models.Model):
     
     def __str__(self):
         return self.sentidoCirculacion
+        #return (f'{self.sentidoCirculacion}, {self.fecha_creacion}, {self.fecha_fin}, {self.HoraPlanificada}, {self.turno_activo}, {self.casilla}, {self.operador}') 
+
 
 class ticket(models.Model):
     importe=models.IntegerField()

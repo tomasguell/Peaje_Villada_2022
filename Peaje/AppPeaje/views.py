@@ -26,15 +26,28 @@ def tickets(request):
             # redirect to a new URL:
 
             vehiculo = form.cleaned_data['tipoVehiculo']
+
             importe = tipoVehiculo.objects.get(tipo = vehiculo).precio
+            #print('importe: {}'.format(importe))
 
             horario = str(datetime.now())
             fecha = horario.split(' ')[0]
             hora = horario.split(' ')[1].split('.')[0]
 
-            #tick = ticket(importe=importe, fecha = fecha, hora = hora, )
-            #tick.save()
-            print(importe)
+            turno_id = list(turnos.objects.all().filter( turno_activo = True).values())[-1]['id']
+            turno = turnos.objects.get(id = turno_id)
+            #print('turno: {}'.format(turno))
+
+            #print(turnos.objects.all().values())
+            #print(operadores.objects.all().values())
+
+            vehiculo_id = list(tipoVehiculo.objects.all().filter( tipo = vehiculo).values())[-1]['id']
+            tipo = tipoVehiculo.objects.get(id = vehiculo_id)
+            #print('tipo: {}'.format(tipo))
+
+            tick = ticket(importe=importe, fecha = fecha, hora = hora, tipoVehiculo = tipo, turno = turno)
+            print(tick)
+            tick.save()
 
             return HttpResponseRedirect('/tickets/')
 
