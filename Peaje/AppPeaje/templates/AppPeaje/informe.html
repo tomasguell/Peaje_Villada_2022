@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% extends "AppPeaje/base.html" %}
+{% block div_content %}
+<h1><center>INFORMES</center></h1>
+<html>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<body>
+
+
+<div id="graficoEstacion" style="width: 50%; float:right"></div>
+
+<script>
+var xArray = ["Italy", "France", "Spain", "USA", "Argentina"];
+var yArray = [55, 49, 44, 24, 15];
+
+var data = [{
+  x:xArray,
+  y:yArray,
+  type:"bar"
+}];
+
+var layout = {title:"Total facturado por dia"};
+
+Plotly.newPlot("graficoEstacion", data, layout);
+</script>
+
+<div id="graficoDia" style="width: 50%; float:left"></div>
+
+<script>
+var xArray = ["Italy", "France", "Spain", "USA", "Argentina"];
+var yArray = [55, 49, 44, 24, 15];
+
+var layout = {title:"Total facturado por estacion"};
+
+var data = [{labels:xArray, values:yArray, type:"pie"}];
+
+Plotly.newPlot("graficoDia", data, layout);
+</script>
+
+</body>
+</html>
+
+
+{% endblock %}

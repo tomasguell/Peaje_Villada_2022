@@ -16,5 +16,10 @@
             <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
+    {% for item in db %}
+        <div class="input-group mb-3">
+            {{ item }}
+        </div>
+    {% endfor %}
 {% endblock %}
 

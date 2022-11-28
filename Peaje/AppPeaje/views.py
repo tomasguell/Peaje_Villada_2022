@@ -1,11 +1,14 @@
 from django.shortcuts import render, HttpResponseRedirect
 from .forms import NuevoTurno
 from datetime import datetime
-from .models import turnos, operadores
+from .models import *
 # Create your views here.
 from django.http import HttpResponseRedirect
 
 from .forms import NuevoTicket
+
+from .models import tipoVehiculo
+from .models import ticket
 
 def index(request):
     context = {'key': 'hola'}
@@ -21,22 +24,43 @@ def tickets(request):
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
+
+            vehiculo = form.cleaned_data['tipoVehiculo']
+
+            importe = tipoVehiculo.objects.get(tipo = vehiculo).precio
+            #print('importe: {}'.format(importe))
+
+            horario = str(datetime.now())
+            fecha = horario.split(' ')[0]
+            hora = horario.split(' ')[1].split('.')[0]
+
+            turno_id = list(turnos.objects.all().filter( turno_activo = True).values())[-1]['id']
+            turno = turnos.objects.get(id = turno_id)
+            #print('turno: {}'.format(turno))
+
+            #print(turnos.objects.all().values())
+            #print(operadores.objects.all().values())
+
+            vehiculo_id = list(tipoVehiculo.objects.all().filter( tipo = vehiculo).values())[-1]['id']
+            tipo = tipoVehiculo.objects.get(id = vehiculo_id)
+            #print('tipo: {}'.format(tipo))
+
+            tick = ticket(importe=importe, fecha = fecha, hora = hora, tipoVehiculo = tipo, turno = turno)
+            print(tick)
+            tick.save()
+
             return HttpResponseRedirect('/tickets/')
 
     # if a GET (or any other method) we'll create a blank form
     else:
         form = NuevoTicket()
+        db = ticket.objects.all()
+        print(db)
 
-    return render(request, 'AppPeaje/tickets.html', {'form': form})
+    return render(request, 'AppPeaje/tickets.html', {'form': form, 'db':db})
 
 def cargar_turnos(request):
     if request.method == 'POST':
-        
-        
-        
-        
-        
-        
         
         form = NuevoTurno(request.POST)
         
@@ -51,18 +75,20 @@ def cargar_turnos(request):
             turno.save()
     else:
         form = NuevoTurno()
+
+    return render(request, 'AppPeaje/turnos.html', {'form':form})
+
+def informe(request):
+    #tickets= ticket.objects.all()
+    #estacion= estaciones.objects.values_list('nombre')
+    #for i in estacion:
+	    #montoEstacion= ticket.objects.values_list('importe').filter(turnos_casilla__estacion__nombre=i)
         
+    #fecha= ticket.objects.values_list('fecha')
+    #for i in fecha:
+	    #montoFecha= ticket.objects.values_list('importe').filter(fecha=i)
+    return render(request, 'AppPeaje/informe.html')
     
-    turnos_activos = turnos.objects.all().filter(turno_activo=True, operador__usuario = request.user)
-        
-    if len(turnos_activos) > 0:
-        
-        activar_form = False
-        
-    else:
-        activar_form = True        
-    return render(request, 'AppPeaje/turnos.html', {'form':form,
-                                                    'activar_form':activar_form})
 
 def terminar_turno(request):
     turnos_activos = turnos.objects.all().filter(turno_activo=True, operador__usuario = request.user)

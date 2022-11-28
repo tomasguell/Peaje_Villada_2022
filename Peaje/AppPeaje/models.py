@@ -75,12 +75,15 @@ class turnos(models.Model):
     
     def __str__(self):
         return self.sentidoCirculacion
+        #return (f'{self.sentidoCirculacion}, {self.fecha_creacion}, {self.fecha_fin}, {self.HoraPlanificada}, {self.turno_activo}, {self.casilla}, {self.operador}') 
+
 
 class ticket(models.Model):
     importe=models.IntegerField()
+    #fecha= models.DateTimeField()
     fecha= models.DateField()
     hora=models.TimeField()
     tipoVehiculo=models.ForeignKey(tipoVehiculo,on_delete=models.CASCADE)
     turno= models.ForeignKey(turnos,on_delete=models.CASCADE)
     def __str__(self) :
-        return (f'{self.fecha} - {self.hora}') 
+        return (f'{self.fecha}, {self.hora}, {self.tipoVehiculo}, {self.importe}, {self.turno}') 
