@@ -1,6 +1,6 @@
 from django import forms
-from .models import turnos
-from .models import ticket
+from .models import turnos,ticket
+
 
 
 class NuevoTurno(forms.ModelForm):

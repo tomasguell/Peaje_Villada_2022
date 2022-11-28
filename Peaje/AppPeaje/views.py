@@ -1,11 +1,11 @@
 from django.shortcuts import render, HttpResponseRedirect
-from .forms import NuevoTurno
+from .forms import NuevoTurno,NuevoTicket
 from datetime import datetime
-from .models import *
+from .models import turnos, ticket, operadores
 # Create your views here.
 from django.http import HttpResponseRedirect
 
-from .forms import NuevoTicket
+
 
 from .models import tipoVehiculo
 from .models import ticket
@@ -33,7 +33,7 @@ def tickets(request):
             horario = str(datetime.now())
             fecha = horario.split(' ')[0]
             hora = horario.split(' ')[1].split('.')[0]
-
+            
             turno_id = list(turnos.objects.all().filter( turno_activo = True).values())[-1]['id']
             turno = turnos.objects.get(id = turno_id)
             #print('turno: {}'.format(turno))
@@ -60,6 +60,7 @@ def tickets(request):
     return render(request, 'AppPeaje/tickets.html', {'form': form, 'db':db})
 
 def cargar_turnos(request):
+    
     if request.method == 'POST':
         
         form = NuevoTurno(request.POST)
@@ -75,8 +76,17 @@ def cargar_turnos(request):
             turno.save()
     else:
         form = NuevoTurno()
+    turnos_activos = turnos.objects.all().filter(turno_activo=True, operador__usuario = request.user)
 
-    return render(request, 'AppPeaje/turnos.html', {'form':form})
+    if len(turnos_activos) > 0:
+
+        activar_form = False
+
+    else:
+        activar_form = True        
+    return render(request, 'AppPeaje/turnos.html', {'form':form,
+                                                    'activar_form':activar_form})
+
 
 def informe(request):
     #tickets= ticket.objects.all()
