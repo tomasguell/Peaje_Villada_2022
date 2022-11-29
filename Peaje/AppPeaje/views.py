@@ -57,7 +57,9 @@ def tickets(request):
         db = ticket.objects.all()
         print(db)
 
-    return render(request, 'AppPeaje/tickets.html', {'form': form, 'db':db})
+    activo = len(list(turnos.objects.all().filter(operador__usuario=request.user , turno_activo = True).values())) > 0
+
+    return render(request, 'AppPeaje/tickets.html', {'form': form, 'db':db, 'activo':activo})
 
 def cargar_turnos(request):
     
@@ -74,6 +76,8 @@ def cargar_turnos(request):
             turno.fecha_creacion = datetime.now()
             turno.operador = fk_operador
             turno.save()
+
+            return HttpResponseRedirect('/tickets/')
     else:
         form = NuevoTurno()
     turnos_activos = turnos.objects.all().filter(turno_activo=True, operador__usuario = request.user)
