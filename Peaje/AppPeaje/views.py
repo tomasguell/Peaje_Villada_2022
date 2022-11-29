@@ -33,10 +33,10 @@ def tickets(request):
             horario = str(datetime.now())
             fecha = horario.split(' ')[0]
             hora = horario.split(' ')[1].split('.')[0]
-            
-            turno_id = list(turnos.objects.all().filter( turno_activo = True).values())[-1]['id']
+
+            turno_id = list(turnos.objects.all().filter(operador__usuario=request.user , turno_activo = True).values())[0]['id']
             turno = turnos.objects.get(id = turno_id)
-            #print('turno: {}'.format(turno))
+            print('turno: {}'.format(turnos.objects.all().filter(operador__usuario=request.user , turno_activo = True).values()))
 
             #print(turnos.objects.all().values())
             #print(operadores.objects.all().values())
