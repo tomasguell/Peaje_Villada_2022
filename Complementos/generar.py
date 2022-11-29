@@ -1,4 +1,10 @@
+import qrcode
 from fpdf import FPDF
+
+def generarQR(nombre, data):
+    img = qrcode.make(data)
+    type(img)  
+    img.save(f"{nombre}.png")
 
 def generarPDF(nombre, data):
 	pdf = FPDF()
