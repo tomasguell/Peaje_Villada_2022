@@ -63,7 +63,6 @@ class turnos(models.Model):
     operador= models.ForeignKey(operadores,on_delete=models.CASCADE, null=True,blank=True)
     
     def __str__(self):
-        #return self.sentidoCirculacion
         return (f'{self.sentidoCirculacion}, {self.HoraPlanificada}, {self.turno_activo}') 
 
 
