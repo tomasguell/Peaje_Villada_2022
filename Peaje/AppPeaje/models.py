@@ -54,7 +54,7 @@ class casillas(models.Model):
     nombre = models.CharField(max_length=30)
     estacion=models.ForeignKey(estaciones,on_delete=models.CASCADE)
     def __str__(self):
-        return self.nombre
+        return (f'{self.nombre} {self.estacion.nombre}') 
 
 class tipoVehiculo(models.Model):
     tipo=models.CharField(max_length=30,choices=tipo,default='' )

@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect
 
 from .models import tipoVehiculo
 from .models import ticket
+from .models import estaciones
 
 def index(request):
     context = {'key': 'hola'}
@@ -94,15 +95,37 @@ def cargar_turnos(request):
 
 def informe(request):
     #tickets= ticket.objects.all()
-    #estacion= estaciones.objects.values_list('nombre')
-    #for i in estacion:
-	    #montoEstacion= ticket.objects.values_list('importe').filter(turnos_casilla__estacion__nombre=i)
-        
+    print(' ')
+    print(' ')
+    print(' ')
+    estacions = list(estaciones.objects.values_list('nombre'))
+
+
+    estacions_dict = {}
+    for e in estacions:
+        nombre = e[0]
+        importes = ticket.objects.values_list('importe').filter(turno__casilla__estacion__nombre=nombre)
+        suma_importes = 0
+        for im in importes:
+            suma_importes += float(im[0])
+        estacions_dict[nombre] = suma_importes
+
+    print(estacions_dict)
+    print(list(estacions_dict))
+    print(list(estacions_dict.values()))
+
+    print(ticket.objects.values_list('importe','fecha').filter(turno__casilla__estacion__nombre='ert'))   
+
+    #print(montoEstacion)
+    print(' ')
+    print(' ')
+    print(' ')
     #fecha= ticket.objects.values_list('fecha')
     #for i in fecha:
 	    #montoFecha= ticket.objects.values_list('importe').filter(fecha=i)
-    return render(request, 'AppPeaje/informe.html')
-    
+
+    return render(request, 'AppPeaje/informe.html', {'estaciones':list(estacions_dict), 'importes':list(estacions_dict.values())})
+
 
 def terminar_turno(request):
     turnos_activos = turnos.objects.all().filter(turno_activo=True, operador__usuario = request.user)

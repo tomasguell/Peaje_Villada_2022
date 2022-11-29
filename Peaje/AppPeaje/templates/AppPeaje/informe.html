@@ -1,38 +1,51 @@
 <!DOCTYPE html>
 {% extends "AppPeaje/base.html" %}
 {% block div_content %}
-<h1 class="text-center">INFORMES</h1>
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <h1 class="text-center"> INFORMES</h1>
 
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-<div id="graficoEstacion" style="width: 50%; float:right"></div>
+  <div id="graficoEstacion" style="width: 50%; float:right"></div>
 
-<script>
-var xArray = ["Italy", "France", "Spain", "USA", "Argentina"];
-var yArray = [3900, 49, 44, 24, 15];
+  <!-- 
+    var xArray =  {{ estaciones|safe }};
+    var yArray = {{ importes }};
+  -->
 
-var data = [{
-  x:xArray,
-  y:yArray,
-  type:"bar"
-}];
+  <script>
+    var x1 = [];
+    var x2 = [];
+    for (var i = 0; i < 500; i ++) {
+      x1[i] = Math.random();
+      x2[i] = Math.random();
+    }
 
-var layout = {title:"Total facturado por dia"};
+    var trace1 = {
+      x: x1,
+      type: "histogram",
+    };
+    var trace2 = {
+      x: x2,
+      type: "histogram",
+    };
+    var data = [trace1, trace2];
+    var layout = {barmode: "stack"};
+    Plotly.newPlot('graficoEstacion', data, layout);
 
-Plotly.newPlot("graficoEstacion", data, layout);
-</script>
+  </script>
 
-<div id="graficoDia" style="width: 50%; float:left"></div>
+  <div id="graficoDia" style="width: 50%; float:left"></div>
 
-<script>
-var xArray = ["Italy", "France", "Spain", "USA", "Argentina"];
-var yArray = [55, 49, 44, 24, 15];
+  <script>
+    var xArray = {{ estaciones|safe }};
+    var yArray = {{ importes }};
 
-var layout = {title:"Total facturado por estacion"};
+    var layout = {title:"Total facturado por estacion"};
 
-var data = [{labels:xArray, values:yArray, type:"pie"}];
+    var data = [{labels:xArray, values:yArray, type:"pie"}];
 
-Plotly.newPlot("graficoDia", data, layout);
-</script>
+    Plotly.newPlot("graficoDia", data, layout);
+
+  </script>
 
 {% endblock %}
