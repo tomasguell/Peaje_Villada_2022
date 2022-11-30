@@ -3,50 +3,93 @@
 {% block div_content %}
   <h1 class="text-center"> INFORMES</h1>
 
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
-  <div id="graficoEstacion" style="width: 50%; float:right"></div>
-
   <!-- 
     var xArray =  {{ estaciones|safe }};
     var yArray = {{ importes }};
   -->
 
+  <div class="row">
 
-  <!--  graficos nuevos  -->
-  <div class="col-xl-4 col-lg-5">
-    <div class="card shadow mb-4">
-        <!-- Card Header - Dropdown -->
+    <div class="col-xl-4 col-lg-5">
+      <!-- Header card -->
+      <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-            <div class="dropdown no-arrow">
-                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                    <div class="dropdown-header">Dropdown Header:</div>
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
+          <h6 class="m-0 font-weight-bold text-primary"> Total facturado por estacion</h6>
+          <!-- Dropdown, opciones para fechas a analizar, etc -->
+          <div class="dropdown no-arrow">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLinkDona" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-header">Dropdown Header:</div>
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
             </div>
+          </div>
         </div>
-        <!-- Card Body -->
+        <!-- Body card -->
         <div class="card-body">
-            <div class="chart-pie pt-4 pb-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                <canvas id="barras"></canvas>
-            </div>
-            <div class="chart-pie pt-4 pb-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                <canvas id="dona"></canvas>
-            </div>
-            <div class="chart-pie pt-4 pb-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                <canvas id="chartMixto"></canvas>
-            </div>
+          <canvas id="dona"></canvas>
         </div>
+      </div>
+
     </div>
+
+    <div class="col-xl-4 col-lg-5">
+      <div class="card shadow mb-4">
+        <!-- Header card -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary"> Comparativo diario por estacion</h6>
+          <!-- Dropdown, opciones para fechas a analizar, etc -->
+          <div class="dropdown no-arrow">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLinkMixto" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-header">Dropdown Header:</div>
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+        </div>
+        <!-- Body card -->
+        <div class="card-body">
+          <canvas id="chartMixto"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-4 col-lg-5">
+      <div class="card shadow mb-4">
+        <!-- Header card -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Comparativo caja de estacion Sources</h6>
+          <!-- Dropdown, opciones para fechas a analizar, etc -->
+          <div class="dropdown no-arrow">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLinkBarras" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-header">Dropdown Header:</div>
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+        </div>
+        <!-- Body card -->
+        <div class="card-body">
+          <canvas id="barras"></canvas>
+        </div>
+      </div>
   </div>
 
+<!-- JavaScript, crear charts y pasar valores -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
@@ -135,62 +178,6 @@
     });
 
   </script>
-
-  <!--  graficos nuevos  -->
-
-  <!--
-  <script>
-    var trace1 = {
-    type: 'bar',
-    x: [1, 2, 3, 4],
-    y: [5, 10, 2, 8],
-    marker: {
-      color: '#C8A2C8',
-      line: {
-          width: 2.5
-        }
-      }
-    };
-    var trace2 = {
-      type: 'bar',
-      x: [1, 2, 3, 4],
-      y: [10, 20, 1, 10],
-      name: "sum",
-      marker: {
-        color: 'Green',
-        line: {
-            width: 2.5
-          }
-        },
-    };
-
-    var data = [ trace1,  trace2];
-
-    var layout = { 
-      title: 'Responsive to window\'s size!',
-      font: {size: 18}
-    };
-
-    var config_viejo = {responsive: true}
-
-    Plotly.newPlot('graficoEstacion', data, layout, config_viejo );
-
-  </script>
-
-  <div id="graficoDia" style="width: 50%; float:left"></div>
-
-  <script>
-    var xArray = {{ estaciones|safe }};
-    var yArray = {{ importes }};
-
-    var layout = {title:"Total facturado por estacion"};
-
-    var data = [{labels:xArray, values:yArray, type:"pie"}];
-
-    Plotly.newPlot("graficoDia", data, layout);
-
-  </script>
-  -->
 
 
 {% endblock %}
