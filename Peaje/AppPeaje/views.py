@@ -104,11 +104,18 @@ def informe(request):
     estacions_dict = {}
     for e in estacions:
         nombre = e[0]
-        importes = ticket.objects.values_list('importe').filter(turno__casilla__estacion__nombre=nombre)
-        suma_importes = 0
+        estacions_dict[nombre] = {}
+
+        importes = ticket.objects.values_list('importe', 'fecha').filter(turno__casilla__estacion__nombre=nombre)
         for im in importes:
-            suma_importes += float(im[0])
-        estacions_dict[nombre] = suma_importes
+            #suma_importes += float(im[0])
+
+            try:
+                x = estacions_dict[nombre][str(im[1])]
+            except:
+                estacions_dict[nombre][str(im[1])] = 0
+
+            estacions_dict[nombre][str(im[1])] += float(im[0])
 
     print(estacions_dict)
     print(list(estacions_dict))
