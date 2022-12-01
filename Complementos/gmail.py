@@ -12,9 +12,9 @@ from email.mime.base import MIMEBase
 def enviarMail(password,sender,receiver):
     # Define the transport variables
     ctx = ssl.create_default_context()
-    password = "ywjrlngnptcvdelw"    # Your app password goes here
-    sender = "peajevillada@gmail.com"    # Your e-mail address
-    receiver = "tomasguell123@gmail.com" # Recipient's address
+    #password = "ywjrlngnptcvdelw"    # Your app password goes here
+    #sender = "peajevillada@gmail.com"    # Your e-mail address
+    #receiver = "tomasguell123@gmail.com" # Recipient's address
 
     # Create the message
     message = MIMEMultipart("alternative")
@@ -47,19 +47,6 @@ def enviarMail(password,sender,receiver):
     
     # add header with pdf name
     payload.add_header('Content-Decomposition', 'attachment', filename=pdfname)
-
-
-
-
-
-
-
-
-
-
-
-
-
     # Add the different alternative parts in order of increasing complexity
     # starting with the simplest first, i.e. the plain text version first.
     message.attach(MIMEText(plain, "plain"))
@@ -72,3 +59,7 @@ def enviarMail(password,sender,receiver):
         server.login(sender, password)
         server.sendmail(sender, receiver, message.as_string())
     return print("Mail enviado!")        
+
+
+
+enviarMail()

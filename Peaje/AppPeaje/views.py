@@ -10,6 +10,14 @@ from django.http import HttpResponseRedirect
 from .models import tipoVehiculo
 from .models import ticket
 
+
+
+
+
+
+
+
+
 def index(request):
     context = {'key': 'hola'}
     return render(request, 'AppPeaje/dashboard.html', context=context)
