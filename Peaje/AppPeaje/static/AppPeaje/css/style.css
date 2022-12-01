@@ -17,6 +17,26 @@ input{
     width:100%!important;
 }
 
+.content textarea{
+    min-width: 100%!important;
+}
+
+textarea{
+    min-width: 100%!important;
+}
+
+#contenidoQueja{
+    min-width: 100%;
+}
+
+[name=contenidoQueja]{
+    min-width: 100%;
+}
+
+
+#btn-queja-div{
+    margin-top: 10%;
+}
 
 
 

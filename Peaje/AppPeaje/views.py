@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from .forms import NuevoTurno,NuevoTicket
 from datetime import datetime
 from .models import turnos, ticket, operadores
@@ -10,10 +10,28 @@ from .models import tipoVehiculo
 from .models import ticket
 from .models import estaciones
 from .generar import generarPDF, generarPDFTurnos
+from .forms import NuevaQueja
 
 
+def quejas(request):
+    
+    
+    if request.method == 'POST':
+        
+        formito = NuevaQueja(request.POST)
+        
+        if formito.is_valid():
+            
+            #PROCESAR LA INFORMACION
+            queja = formito.save(commit=False)
+            queja.fechaReclamo = datetime.now()
+            queja.save()
 
-
+            return HttpResponse("<h3>Queja Validada, espere contestacion en su email en 7 dias habiles</h3>")
+    else:
+        formito = NuevaQueja()
+    
+    return render(request, 'AppPeaje/quejas.html', {'formito':formito})
 
 
 
@@ -146,6 +164,14 @@ def informe(request):
     return render(request, 'AppPeaje/informe.html', {'estaciones':list(estacions_dict), 'importes':list(estacions_dict.values())})
 
 
+
+
+
+
+
+
+
+
 def terminar_turno(request):
     
     cantidad_emitido = 0
@@ -192,3 +218,7 @@ def terminar_turno(request):
     except IndexError:
         pass    
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
+

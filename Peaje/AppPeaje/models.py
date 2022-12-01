@@ -74,3 +74,12 @@ class ticket(models.Model):
     turno= models.ForeignKey(turnos,on_delete=models.CASCADE)
     def __str__(self) :
         return (f'{self.fecha}, {self.hora}, {self.tipoVehiculo}, {self.importe}, {self.turno}') 
+
+
+class quejas(models.Model):
+    nombreCompleto = models.CharField(max_length=20)
+    gmail = models.EmailField()
+    contenidoQueja = models.TextField(max_length=300)
+    fechaReclamo = models.DateTimeField(null=True)  
+    ticket = models.ForeignKey(ticket, on_delete=models.CASCADE)
+    

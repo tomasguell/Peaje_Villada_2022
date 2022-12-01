@@ -1,5 +1,5 @@
 from django import forms
-from .models import turnos,ticket
+from .models import turnos,ticket,quejas
 
 
 
@@ -16,3 +16,9 @@ class NuevoTicket(forms.ModelForm):
         #fields = '__all__'
         exclude = ('importe', 'fecha', 'hora', 'turno')
 
+class NuevaQueja(forms.ModelForm):
+    class Meta:
+        model = quejas
+        exclude = ('fechaReclamo',)
+        
+       
