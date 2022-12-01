@@ -11,6 +11,7 @@ from .models import ticket
 from .models import estaciones
 from .generar import generarPDF, generarPDFTurnos
 from .forms import NuevaQueja
+from .generar import generarPDF, generarPDFTurnos, generarPDFTicket, generarQR
 
 
 def quejas(request):
@@ -73,6 +74,9 @@ def tickets(request):
             
             casilla=turnos.objects.all().filter(operador__usuario=request.user , turno_activo = True).values()[0]['casilla_id']
             operador=turnos.objects.all().filter(operador__usuario=request.user , turno_activo = True).values()[0]['operador_id']
+            DiccTicket={"Numero de ticket ": turno_id, "fecha ": fecha,"hora": hora,"importe": importe, "tipo vehiculo": tipo, "casilla": casilla, "operador": operador}
+            generarQR("QR","http://127.0.0.1:8000/tickets/")
+            generarPDFTicket(turno_id, DiccTicket.items())
             print(f"Numero de ticket: {turno_id} fecha: {fecha}, hora: {hora}, importe: {importe}, tipo vehiculo: {tipo}, casilla: {casilla}, operador: {operador}")
             
             tick = ticket(importe=importe, fecha = fecha, hora = hora, tipoVehiculo = tipo, turno = turno)
