@@ -31,7 +31,7 @@ def generarPDFTurnos(nombre, cantidad_emitido,monto_cobrado,cantidad_por_categor
 	pdf.add_page()
 	pdf.set_font("Arial", size = 20)
 	pdf.cell(200, 10, txt = f"Informe Turno {user}",
-			 ln = 1,align = 'C')
+			 ln =1 ,align = 'C')
 	pdf.cell(200, 10, txt = f"Fecha y hora: {date}",
 			 ln = 2,align = 'C')
 	pdf.set_font("Arial", size = 15)
