@@ -79,8 +79,8 @@ def tickets(request):
             
             casilla=turnos.objects.all().filter(operador__usuario=request.user , turno_activo = True).values()[0]['casilla_id']
             operador=turnos.objects.all().filter(operador__usuario=request.user , turno_activo = True).values()[0]['operador_id']
-            DiccTicket={"Numero de ticket ": turno_id, "fecha ": fecha,"hora": hora,"importe": importe, "tipo vehiculo": tipo, "casilla": casilla, "operador": operador}
-            generarQR("QR","http://127.0.0.1:8000/tickets/")
+            DiccTicket={"Numero de ticket ": turno_id, "fecha ": fecha,"hora": hora,"importe": importe, "tipo vehiculo": str(tipo), "casilla": casilla, "operador": operador}
+            generarQR("QR","http://127.0.0.1:8000/quejas/")
             generarPDFTicket(turno_id, DiccTicket.items())
             print(f"Numero de ticket: {turno_id} fecha: {fecha}, hora: {hora}, importe: {importe}, tipo vehiculo: {tipo}, casilla: {casilla}, operador: {operador}")
             
