@@ -2,6 +2,7 @@
 {% extends "AppPeaje/base.html" %}
 {% block div_content %}
 
+  {% if user.is_superuser%}
   <h1 class="text-center"> INFORMES</h1>
 
   <!-- 
@@ -91,17 +92,13 @@
     </div>
   </div>
 
-  <ul>
-    {% for key, value in estaciones.items %} 
-      <li>{{key}} - {{value.Total}}</li>
-    {% endfor %}
-    <li>
-      {{ estaciones.ert.Total }}</li>
-  </ul>
-  {% for i in estaciones %}
-    {{ estaciones.i.Total }}
-  {% endfor %}
-
+  
+  {% else %}
+  <h1 class="text-center"> No eres un Admin</h1>
+  <form action="../">
+  <button class="btn btn-primary">Volver</button> 
+  </form>
+  {% endif %}
 
 <!-- JavaScript, crear charts y pasar valores -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
