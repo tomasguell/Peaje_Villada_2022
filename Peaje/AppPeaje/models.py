@@ -79,6 +79,7 @@ class ticket(models.Model):
 class quejas(models.Model):
     nombreCompleto = models.CharField(max_length=20)
     gmail = models.EmailField()
+    tituloQueja = models.CharField(max_length=25)
     contenidoQueja = models.TextField(max_length=300)
     fechaReclamo = models.DateTimeField(null=True)  
     ticket = models.ForeignKey(ticket, on_delete=models.CASCADE)

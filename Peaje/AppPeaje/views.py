@@ -12,7 +12,7 @@ from .models import estaciones
 from .generar import generarPDF, generarPDFTurnos
 from .forms import NuevaQueja
 from .generar import generarPDF, generarPDFTurnos, generarPDFTicket, generarQR
-
+from .gmail import recibirMailQueja
 
 def quejas(request):
     
@@ -27,7 +27,12 @@ def quejas(request):
             queja = formito.save(commit=False)
             queja.fechaReclamo = datetime.now()
             queja.save()
-
+            queja_dict = {"tituloQueja":queja.tituloQueja,
+                          "contenidoQueja":queja.contenidoQueja,
+                          "nombreCompleto":queja.nombreCompleto,
+                          "gmail": queja.gmail
+            }
+            recibirMailQueja("ywjrlngnptcvdelw","peajevillada@gmail.com", "peajevillada@gmail.com", queja_dict)
             return HttpResponse("<h3>Queja Validada, espere contestacion en su email en 7 dias habiles</h3>")
     else:
         formito = NuevaQueja()
