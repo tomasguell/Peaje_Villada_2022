@@ -18,7 +18,10 @@ $ python3 manage.py runserver
 
 ```
 ## 📷 SCREENSHOT 📷
-![Image text]()
+![Admin](Complementos/admin.png)
+![Admin](Complementos/informe.png)
+![Admin](Complementos/inicial.png)
+![Admin](Complementos/quejas.png)
 ## 🦾 TECNOLOGIAS USADAS 🦾
 ```
 > Python
