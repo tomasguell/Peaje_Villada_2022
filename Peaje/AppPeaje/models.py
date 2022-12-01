@@ -16,17 +16,6 @@ class TipoDocumento(models.Model):
     def __str__(self):
         return self.tipo
 
-
-"""
-class user(models.Model):
-    id
-    username
-    password
-
-"""
-
-
-
 class operadores(models.Model):
     numeroEmpleado=models.CharField(max_length=10)
     numeroDocumento=models.CharField(max_length=10)
@@ -54,7 +43,7 @@ class casillas(models.Model):
     nombre = models.CharField(max_length=30)
     estacion=models.ForeignKey(estaciones,on_delete=models.CASCADE)
     def __str__(self):
-        return self.nombre
+        return (f'{self.nombre} {self.estacion.nombre}') 
 
 class tipoVehiculo(models.Model):
     tipo=models.CharField(max_length=30,choices=tipo,default='' )
@@ -74,13 +63,11 @@ class turnos(models.Model):
     operador= models.ForeignKey(operadores,on_delete=models.CASCADE, null=True,blank=True)
     
     def __str__(self):
-        return self.sentidoCirculacion
-        #return (f'{self.sentidoCirculacion}, {self.fecha_creacion}, {self.fecha_fin}, {self.HoraPlanificada}, {self.turno_activo}, {self.casilla}, {self.operador}') 
+        return (f'{self.sentidoCirculacion}, {self.HoraPlanificada}, {self.turno_activo}') 
 
 
 class ticket(models.Model):
     importe=models.IntegerField()
-    #fecha= models.DateTimeField()
     fecha= models.DateField()
     hora=models.TimeField()
     tipoVehiculo=models.ForeignKey(tipoVehiculo,on_delete=models.CASCADE)

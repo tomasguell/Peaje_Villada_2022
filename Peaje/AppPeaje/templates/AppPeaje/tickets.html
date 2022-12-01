@@ -2,24 +2,34 @@
 {% extends "AppPeaje/base.html" %}
 {% block div_content %}
     <h2 class="fs-3"> Tickets</h2>
-    <form action="/tickets/" method="post" class="row row-cols-lg-auto g-3 align-items-center">
-        {% csrf_token %}
 
-        <div class="col-12">
-            <h5 class="fs-5"> Tipo de Vehiculo: </h5>
-        </div>
+    {% if activo %}
+        <form action="/tickets/" method="post" class="row row-cols-lg-auto g-3 align-items-center">
+            {% csrf_token %}
 
-        <div class="col-12">
-            {{ form.tipoVehiculo }}
-        </div>
-        <div class="col-12">
-            <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
-        </div>
-    </form>
-    {% for item in db %}
-        <div class="input-group mb-3">
-            {{ item }}
-        </div>
-    {% endfor %}
+            <div class="col-12">
+                <h5 class="fs-5"> Tipo de Vehiculo: </h5>
+            </div>
+
+            <div class="col-12">
+                {{ form.tipoVehiculo }}
+            </div>
+            <div class="col-12">
+                <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+        {% for item in db %}
+            <div class="input-group mb-3">
+                {{ item }}
+            </div>
+        {% endfor %}
+
+    {% else %}
+
+        <h2 class="fs-5"> No hay turnos creados recientemente</h2>
+        <button type="submit" class="btn btn-primary" onclick="location.href='../turnos'" > Turnos</button>
+
+    {% endif %}
+
 {% endblock %}
 
