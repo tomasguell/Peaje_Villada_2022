@@ -40,3 +40,16 @@ def generarPDFTurnos(nombre, cantidad_emitido,monto_cobrado,cantidad_por_categor
         
 	pdf.output(f"../Informes/{nombre}.pdf")
 
+def generarPDFTicket(nombre,diccionario):
+	pdf = FPDF()
+	pdf.add_page()
+	a=0	 
+	pdf.set_font("Arial", size = 15)
+	for i in diccionario:
+		a=a+1
+		print(i)
+		pdf.cell(200, 10, txt = f"{i}",
+			  ln = a,	 align = 'C')
+        
+	pdf.output(f"../Informes/{nombre}.pdf")
+
