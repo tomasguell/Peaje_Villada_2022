@@ -11,9 +11,11 @@ from email.mime.base import MIMEBase
 
 def enviarMail(password,sender,receiver):
     ctx = ssl.create_default_context()
-    password = "ywjrlngnptcvdelw"    # Your app password goes here
-    sender = "peajevillada@gmail.com"    # Your e-mail address
-    receiver = "tomasguell123@gmail.com" # Recipient's address
+    #password = "ywjrlngnptcvdelw"    # Your app password goes here
+    #sender = "peajevillada@gmail.com"    # Your e-mail address
+    #receiver = "tomasguell123@gmail.com" # Recipient's address
+
+    # Create the message
     message = MIMEMultipart("alternative")
     message["Subject"] = "<Informe Peaje Villada>"
     message["From"] = sender
@@ -36,3 +38,7 @@ def enviarMail(password,sender,receiver):
         server.login(sender, password)
         server.sendmail(sender, receiver, message.as_string())
     return print("Mail enviado!")        
+
+
+
+enviarMail()

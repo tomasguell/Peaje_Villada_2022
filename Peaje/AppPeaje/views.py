@@ -11,6 +11,14 @@ from .models import tipoVehiculo
 from .models import ticket
 from .models import estaciones
 
+
+
+
+
+
+
+
+
 def index(request):
     context = {'key': 'hola'}
     return render(request, 'AppPeaje/dashboard.html', context=context)
