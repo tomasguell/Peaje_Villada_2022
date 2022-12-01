@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect
 from .models import tipoVehiculo
 from .models import ticket
 from .models import estaciones
-from .generar import generarPDF, generarPDFTurnos, generarPDFTicket
+from .generar import generarPDF, generarPDFTurnos, generarPDFTicket, generarQR
 
 
 
@@ -56,6 +56,7 @@ def tickets(request):
             casilla=turnos.objects.all().filter(operador__usuario=request.user , turno_activo = True).values()[0]['casilla_id']
             operador=turnos.objects.all().filter(operador__usuario=request.user , turno_activo = True).values()[0]['operador_id']
             DiccTicket={"Numero de ticket ": turno_id, "fecha ": fecha,"hora": hora,"importe": importe, "tipo vehiculo": tipo, "casilla": casilla, "operador": operador}
+            generarQR("QR","http://127.0.0.1:8000/tickets/")
             generarPDFTicket(turno_id, DiccTicket.items())
             print(f"Numero de ticket: {turno_id} fecha: {fecha}, hora: {hora}, importe: {importe}, tipo vehiculo: {tipo}, casilla: {casilla}, operador: {operador}")
             
@@ -179,8 +180,9 @@ def terminar_turno(request):
                       "cantidad_vehiculos_por_categoria":cantidad_por_categoria
                       }"""
     
-    
-    generarPDFTurnos(f"turno_informe{datetime.now()}",cantidad_emitido,monto_cobrado,cantidad_por_categoria.items())    
+    date = datetime.now()
+    date = date.replace(second=0,microsecond=0)
+    generarPDFTurnos(f"turno_informe{date}",cantidad_emitido,monto_cobrado,cantidad_por_categoria.items(),request.user,date)    
     
     
     
