@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% extends "AppPeaje/base.html" %}
 {% block div_content %}
-{% if user.is_superuser%}
+
   <h1 class="text-center"> INFORMES</h1>
 
   <!-- 
@@ -88,22 +88,123 @@
           <canvas id="barras"></canvas>
         </div>
       </div>
+    </div>
   </div>
-{% else %}
-<h1 class="text-center"> No eres un Admin</h1>
-<form action="../">
-<button class="btn btn-primary">Volver</button> 
-</form>
-{% endif %}
+
+  <ul>
+    {% for key, value in estaciones.items %} 
+      <li>{{key}} - {{value.Total}}</li>
+    {% endfor %}
+    <li>
+      {{ estaciones.ert.Total }}</li>
+  </ul>
+  {% for i in estaciones %}
+    {{ estaciones.i.Total }}
+  {% endfor %}
+
+
 <!-- JavaScript, crear charts y pasar valores -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
 
     const barras = document.getElementById('barras');
-  
+
+    const tipos = {
+      'Chart 1':'doughnut',
+      'Chart 2':'bar',
+      'Chart 3':'bar',
+    };
+
+    //var testing = {
+    //  'Chart 1': '{{ estaciones.ert.Total }}' };
+    //testing.FacundoMVP = "value1";
+    //console.log(testing);
+
+    var datas = {
+      'Chart 1' : {
+        'labels' : [],
+        'data' : []
+      },
+      'Chart 2' : {
+        'sobreescribir':{},
+        'labels' : [],
+        'datasets' : []
+      }
+    }
+    
+    for (i in {{estaciones|safe}}) {
+      datas['Chart 1']['labels'].push(i);
+      datas['Chart 1']['data'].push({{estaciones|safe}}[i]['Total']);
+    };
+    console.log(datas);
+
+    const dona = document.getElementById('dona');
+    new Chart(dona, {
+      type: tipos['Chart 1'],
+      data: {
+        labels: datas['Chart 1']['labels'],
+        datasets: [{
+          label: 'Estaciones',
+          data: datas['Chart 1']['data'],
+          backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)'
+          ],
+          hoverOffset: 4
+        }],
+    }
+    });
+
+    //var testing = [0,2];
+    //if (testing[2] == undefined) {
+    //  console.log('indefinido wacho');
+    //};
+
+    //{'ert': {'Total': 2115.0, 'Diario': {'2022-11-28': 810.0, '2022-11-29': 1305.0}},
+    // 'Facundo MVP': {'Total': 2610.0, 'Diario': {'2022-11-29': 1620.0, '2022-12-01': 990.0}}}
+    for (estacion in datas['Chart 1']['labels']) {
+      const estacion_ = datas['Chart 1']['labels'][estacion];
+
+      var dset = {
+        type: 'bar',
+        label: estacion_,
+        data: [],
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      };
+
+      for (fecha in {{estaciones|safe}}[estacion_]['Diario']) {
+        if (datas['Chart 2']['sobreescribir'][fecha] == undefined){
+          datas['Chart 2']['labels'].push(fecha);
+          datas['Chart 2']['sobreescribir'][fecha] = "";
+        };
+        dset.data.push({{estaciones|safe}}[estacion_]['Diario'][fecha]);
+      };
+      datas['Chart 2']['datasets'].push(dset);
+
+    };
+    console.log(datas);
+
+    const mixto = document.getElementById('chartMixto');
+    new Chart(mixto, {
+      type: tipos['Chart 2'],
+      data: {
+          labels: datas['Chart 2']['labels'],
+          datasets: datas['Chart 2']['datasets']
+        },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+        }
+    });
+
     new Chart(barras, {
-      type: 'bar',
+      type: tipos['Chart 3'],
       data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
@@ -119,68 +220,6 @@
           }
         }
       }
-    });
-
-    const dona = document.getElementById('dona');
-    new Chart(dona, {
-      type: 'doughnut',
-      data: {
-        labels: [
-          'Red',
-          'Blue',
-          'Yellow'
-        ],
-        datasets: [{
-          label: 'My First Dataset',
-          data: [300, 50, 100],
-          backgroundColor: [
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)'
-          ],
-          hoverOffset: 4
-        }],
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    }
-    });
-
-    const mixto = document.getElementById('chartMixto');
-    new Chart(mixto, {
-      type: 'bar',
-      data: {
-          labels: [
-            'January',
-            'February',
-            'March',
-            'April'
-          ],
-          datasets: [{
-            type: 'bar',
-            label: 'Bar Dataset',
-            data: [10, 20, 30, 40],
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.2)'
-          }, {
-            type: 'bar',
-            label: 'Line Dataset',
-            data: [50, 50, 50, 50],
-            fill: false,
-            borderColor: 'rgb(54, 162, 235)'
-          }]
-        },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-        }
     });
 
   </script>

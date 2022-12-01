@@ -1,6 +1,8 @@
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from .forms import NuevoTurno,NuevoTicket
 from datetime import datetime
+import time
+
 from .models import turnos, ticket, operadores
 # Create your views here.
 from django.http import HttpResponseRedirect
@@ -141,20 +143,49 @@ def informe(request):
 
 
     estacions_dict = {}
+    fechas = {}
     for e in estacions:
         nombre = e[0]
         estacions_dict[nombre] = {}
+        estacions_dict[nombre]['Total'] = 0
+        estacions_dict[nombre]['Diario'] = {}
 
         importes = ticket.objects.values_list('importe', 'fecha').filter(turno__casilla__estacion__nombre=nombre)
         for im in importes:
-            #suma_importes += float(im[0])
+            fecha = str(im[1])
+            fechas[datetime(int(fecha[0:4]), int(fecha[5:7]), int(fecha[8:10])).timestamp()] = fecha
 
             try:
-                x = estacions_dict[nombre][str(im[1])]
+                x = estacions_dict[nombre]['Diario'][str(im[1])]
             except:
-                estacions_dict[nombre][str(im[1])] = 0
+                #172,800 = 2 dias
+                #86,400 = 1 dia
+                fecha = str(im[1])
 
-            estacions_dict[nombre][str(im[1])] += float(im[0])
+                estacions_dict[nombre]['Diario'][str(im[1])] = 0
+
+            estacions_dict[nombre]['Total'] += float(im[0])
+            estacions_dict[nombre]['Diario'][str(im[1])] += float(im[0])
+
+    fechas_list = list(fechas)
+    fechas_list.sort()
+    for est in estacions_dict:
+        diarios_keys =  list(estacions_dict[est]['Diario'])
+        diarios_values = list(estacions_dict[est]['Diario'].values())
+        ind = 0
+        for fecha in fechas:
+            try:
+                estacions_dict[est]['Diario'][fechas[fecha]]
+            except:
+                diarios_values.insert(ind, 0)
+                diarios_keys.insert(ind, fechas[fecha])
+                estacions_dict[est]['Diario'][fecha] = 0
+            ind += 1
+
+        estacions_dict[est]['Diario'] = {}
+        for i in range(len(diarios_keys)):
+            estacions_dict[est]['Diario'][diarios_keys[i]] = diarios_values[i]
+
 
     print(estacions_dict)
     print(list(estacions_dict))
@@ -162,15 +193,11 @@ def informe(request):
 
     print(ticket.objects.values_list('importe','fecha').filter(turno__casilla__estacion__nombre='ert'))   
 
-    #print(montoEstacion)
     print(' ')
     print(' ')
     print(' ')
-    #fecha= ticket.objects.values_list('fecha')
-    #for i in fecha:
-	    #montoFecha= ticket.objects.values_list('importe').filter(fecha=i)
 
-    return render(request, 'AppPeaje/informe.html', {'estaciones':list(estacions_dict), 'importes':list(estacions_dict.values())})
+    return render(request, 'AppPeaje/informe.html', {'estaciones':estacions_dict})#list(estacions_dict), 'importes':list(estacions_dict.values())})
 
 
 
