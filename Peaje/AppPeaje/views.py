@@ -78,14 +78,14 @@ def tickets(request):
             vehiculo_id = list(tipoVehiculo.objects.all().filter( tipo = vehiculo).values())[-1]['id']
             tipo = tipoVehiculo.objects.get(id = vehiculo_id)
             #print('tipo: {}'.format(tipo))
-            
+
             casilla=turnos.objects.all().filter(operador__usuario=request.user , turno_activo = True).values()[0]['casilla_id']
             operador=turnos.objects.all().filter(operador__usuario=request.user , turno_activo = True).values()[0]['operador_id']
-            DiccTicket={"Numero de ticket ": turno_id, "fecha ": fecha,"hora": hora,"importe": importe, "tipo vehiculo": str(tipo), "casilla": casilla, "operador": operador}
-            generarQR("QR","http://127.0.0.1:8000/quejas/")
+            DiccTicket={"Numero de ticket ": turno_id, "fecha ": fecha,"hora": hora,"importe": importe, "tipo vehiculo": tipo, "casilla": casilla, "operador": operador}
+            generarQR("QR","http://127.0.0.1:8000/tickets/")
             generarPDFTicket(turno_id, DiccTicket.items())
             print(f"Numero de ticket: {turno_id} fecha: {fecha}, hora: {hora}, importe: {importe}, tipo vehiculo: {tipo}, casilla: {casilla}, operador: {operador}")
-            
+
             tick = ticket(importe=importe, fecha = fecha, hora = hora, tipoVehiculo = tipo, turno = turno)
             print(tick)
             tick.save()
@@ -96,7 +96,7 @@ def tickets(request):
     # if a GET (or any other method) we'll create a blank form
     else:
         form = NuevoTicket()
-        db = ticket.objects.all()
+        db = ticket.objects.all().filter(turno__operador__usuario=request.user , turno__turno_activo = True)
         print(db)
 
     activo = len(list(turnos.objects.all().filter(operador__usuario=request.user , turno_activo = True).values())) > 0
