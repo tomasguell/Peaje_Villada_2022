@@ -85,10 +85,10 @@ button:hover {
   }
 
 footer {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     width: 80%;
-}
+}    
 
 .block {
     display: block;

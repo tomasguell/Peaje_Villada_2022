@@ -22,20 +22,27 @@
                 <h1 class="fs-4"><span class="bg-white text-dark rounded shadow px-2 me-2">GGOO</span><span class="text-white">Peaje</span></h1>
                 <button class="btn d-md-none d-block close-btn px-1 py-0 text-white"><i class="bi bi-list"></i></button>
             </div>
-
+            {% if user.is_authenticated %}
             <ul class="list-unstyled px-2">
                 <li class="active"><a href="" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-house-door"></i> Dashboard</a></li>
-                <li class=""><a href="" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-list-ul"></i> Projects</a></li>
+                <li class=""><a href="../tickets" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-list-ul"></i> Tickets </a></li>
                 <li class=""><a href="../informe" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-chat"></i> Informe</a></li>
                 <li class=""><a href="../turnos" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-envelope-paper"></i> Turnos</a></li>
-                <li class=""><a href="../tickets" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-people"></i> Tickets</a></li>
+                <li class=""><a href="../quejas" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-people"></i> Quejas</a></li>
             </ul>
 
             <hr class="h-color mx-3 ">
             <ul class="list-unstyled px-2">
-                <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-sliders"></i> Settings</a></li>
-                <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-app-indicator"></i> Notifications</a></li>
+                <li class=""><a href="../admin" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-sliders"></i> Admin</a></li>
+                
             </ul>
+
+        {% else %}  
+            <ul class="list-unstyled px-2">
+                <li class="active"><a href="../" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-house-door"></i> Dashboard</a></li>
+                <li class=""><a href="../quejas" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-people"></i> Quejas</a></li>
+            </ul>
+        {% endif %}  
 
             {% if user.is_authenticated %}
             <hr class="h-color mx-3 ">

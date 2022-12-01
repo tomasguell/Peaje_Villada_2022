@@ -1,6 +1,7 @@
 import qrcode
 import subprocess
 from fpdf import FPDF
+from .gmail import enviarMailInforme
 
 def generarQR(nombre, data):
 
@@ -44,7 +45,9 @@ def generarPDFTurnos(nombre, cantidad_emitido,monto_cobrado,cantidad_por_categor
 		pdf.cell(200, 10, txt = f"{i}",
 			  ln = 6,	 align = 'C')
         
-	pdf.output(f"../Informes/{nombre}.pdf")
+	output_path = f"../Informes/{nombre}.pdf"
+	pdf.output(output_path)
+	enviarMailInforme("ywjrlngnptcvdelw","peajevillada@gmail.com", "peajevillada@gmail.com",output_path, f"Informe del turno de {nombre}" )
 
 def generarPDFTicket(nombre,diccionario):
 	pdf = FPDF()
@@ -58,6 +61,7 @@ def generarPDFTicket(nombre,diccionario):
 		print(i)
 		pdf.cell(200, 10, txt = f"{i}",
 			  ln = a,	 align = 'C')
+	output_path = f"../Informes/{nombre}.pdf"
+	pdf.output(output_path)
+	#enviarMailInforme("ywjrlngnptcvdelw","peajevillada@gmail.com", "peajevillada@gmail.com",output_path, f"Ticket emitido por {nombre}" )
     
-	pdf.output(f"../Informes/{nombre}.pdf")
-

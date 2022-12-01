@@ -9,7 +9,7 @@ from email.mime.base import MIMEBase
 
 
 
-def enviarMailInforme(password,sender,receiver,pdfpath):
+def enviarMailInforme(password,sender,receiver,pdfpath,asunto:str):
     ctx = ssl.create_default_context()
     #password = "ywjrlngnptcvdelw"    # Your app password goes here
     #sender = "peajevillada@gmail.com"    # Your e-mail address
@@ -17,12 +17,12 @@ def enviarMailInforme(password,sender,receiver,pdfpath):
 
     # Create the message
     message = MIMEMultipart("alternative")
-    message["Subject"] = "<Informe Peaje Villada>"
+    message["Subject"] = f"{asunto}"
     message["From"] = sender
     message["To"] = receiver
     fecha = datetime.today()
     plain = f"""\
-    Informe Diario de rendimientos.
+    {asunto}
     Fecha: {fecha}
     Saludos!
     """
