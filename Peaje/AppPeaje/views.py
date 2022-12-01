@@ -4,7 +4,7 @@ from datetime import datetime
 from .models import turnos, ticket, operadores
 # Create your views here.
 from django.http import HttpResponseRedirect
-
+#from Complementos.generar import generarPDF
 
 
 from .models import tipoVehiculo
@@ -14,6 +14,11 @@ from .models import estaciones
 def index(request):
     context = {'key': 'hola'}
     return render(request, 'AppPeaje/dashboard.html', context=context)
+
+def crearTicket(request):
+    return none
+
+
 
 def tickets(request):
     # if this is a POST request we need to process the form data
@@ -25,6 +30,10 @@ def tickets(request):
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
+            
+
+
+
 
             vehiculo = form.cleaned_data['tipoVehiculo']
 
@@ -49,7 +58,8 @@ def tickets(request):
             tick = ticket(importe=importe, fecha = fecha, hora = hora, tipoVehiculo = tipo, turno = turno)
             print(tick)
             tick.save()
-
+            # ACA VA LA FUNCION
+            
             return HttpResponseRedirect('/tickets/')
 
     # if a GET (or any other method) we'll create a blank form
