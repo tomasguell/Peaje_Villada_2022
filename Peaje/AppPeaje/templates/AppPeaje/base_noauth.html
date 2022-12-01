@@ -23,28 +23,26 @@
                 <button class="btn d-md-none d-block close-btn px-1 py-0 text-white"><i class="bi bi-list"></i></button>
             </div>
             {% if user.is_authenticated %}
-                <ul class="list-unstyled px-2">
-                    <li class="active"><a href="" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-house-door"></i> Dashboard</a></li>
-                    <li class=""><a href="../tickets" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-list-ul"></i> Tickets </a></li>
-                    <li class=""><a href="../informe" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-chat"></i> Informe</a></li>
-                    <li class=""><a href="../turnos" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-envelope-paper"></i> Turnos</a></li>
-                    <li class=""><a href="../quejas" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-people"></i> Quejas</a></li>
-                </ul>
+            <ul class="list-unstyled px-2">
+                <li class="active"><a href="" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-house-door"></i> Dashboard</a></li>
+                <li class=""><a href="../tickets" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-list-ul"></i> Tickets </a></li>
+                <li class=""><a href="../informe" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-chat"></i> Informe</a></li>
+                <li class=""><a href="../turnos" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-envelope-paper"></i> Turnos</a></li>
+                <li class=""><a href="../quejas" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-people"></i> Quejas</a></li>
+            </ul>
 
-                <hr class="h-color mx-3 ">
-                <ul class="list-unstyled px-2">
-                    <li class=""><a href="../admin" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-sliders"></i> Admin</a></li>
-                    
-                </ul>
+            <hr class="h-color mx-3 ">
+            <ul class="list-unstyled px-2">
+                <li class=""><a href="../admin" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-sliders"></i> Admin</a></li>
+                
+            </ul>
 
-            {% else %}  
-                <ul class="list-unstyled px-2">
-                    <li class="active"><a href="../" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-house-door"></i> Dashboard</a></li>
-                    <li class=""><a href="../quejas" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-people"></i> Quejas</a></li>
-                </ul>
-            {% endif %}    
-
-
+        {% else %}  
+            <ul class="list-unstyled px-2">
+                <li class="active"><a href="../" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-house-door"></i> Dashboard</a></li>
+                <li class=""><a href="../quejas" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-people"></i> Quejas</a></li>
+            </ul>
+        {% endif %}  
 
             {% if user.is_authenticated %}
             <hr class="h-color mx-3 ">
@@ -87,14 +85,12 @@
 
             </nav>
             {% endblock navbar %}
-            <div class="dashboard-content px-3 pt-4">
-                {% if user.is_authenticated %}
-                    {% block div_content %}
+            <div class="content dashboard-content px-3 pt-4">
+                
+                {% block div_content %}
 
-                    {% endblock %}
-                {% else %}
-                    <p>You are not logged in</p>
-                {% endif %}
+                {% endblock %}
+                
                 
             </div>
 

@@ -16,6 +16,7 @@ class OperadoresAdmin(admin.ModelAdmin):
 admin.site.register(operadores, OperadoresAdmin)
 admin.site.register(rutas)
 
+
 class EstacionesAdmin(admin.ModelAdmin):
     list_display =['nombre','km','ruta'] 
     search_fields=['ruta']
@@ -34,4 +35,4 @@ admin.site.register(ticket, TicketAdmin)
 class TurnosAdmin(admin.ModelAdmin):
     date_hierarchy = 'fecha_creacion'
 admin.site.register(turnos,TurnosAdmin)
-
+admin.site.register(quejas)

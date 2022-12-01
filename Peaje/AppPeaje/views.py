@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from .forms import NuevoTurno,NuevoTicket
 from datetime import datetime
 import time
@@ -7,15 +7,47 @@ from .models import turnos, ticket, operadores
 # Create your views here.
 from django.http import HttpResponseRedirect
 
-
-
+#from ...Complementos.generar import generarPDF
 from .models import tipoVehiculo
 from .models import ticket
 from .models import estaciones
+from .generar import generarPDF, generarPDFTurnos
+from .forms import NuevaQueja
+from .generar import generarPDF, generarPDFTurnos, generarPDFTicket, generarQR
+from .gmail import recibirMailQueja
+
+def quejas(request):
+    
+    
+    if request.method == 'POST':
+        
+        formito = NuevaQueja(request.POST)
+        
+        if formito.is_valid():
+            
+            #PROCESAR LA INFORMACION
+            queja = formito.save(commit=False)
+            queja.fechaReclamo = datetime.now()
+            queja.save()
+            queja_dict = {"tituloQueja":queja.tituloQueja,
+                          "contenidoQueja":queja.contenidoQueja,
+                          "nombreCompleto":queja.nombreCompleto,
+                          "gmail": queja.gmail
+            }
+            recibirMailQueja("ywjrlngnptcvdelw","peajevillada@gmail.com", "peajevillada@gmail.com", queja_dict)
+            return HttpResponse("<h3>Queja Validada, espere contestacion en su email en 7 dias habiles</h3>")
+    else:
+        formito = NuevaQueja()
+    
+    return render(request, 'AppPeaje/quejas.html', {'formito':formito})
+
+
+
 
 def index(request):
     context = {'key': 'hola'}
     return render(request, 'AppPeaje/dashboard.html', context=context)
+
 
 def tickets(request):
     # if this is a POST request we need to process the form data
@@ -27,7 +59,6 @@ def tickets(request):
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
-
             vehiculo = form.cleaned_data['tipoVehiculo']
 
             importe = tipoVehiculo.objects.get(tipo = vehiculo).precio
@@ -47,11 +78,19 @@ def tickets(request):
             vehiculo_id = list(tipoVehiculo.objects.all().filter( tipo = vehiculo).values())[-1]['id']
             tipo = tipoVehiculo.objects.get(id = vehiculo_id)
             #print('tipo: {}'.format(tipo))
-
+            
+            casilla=turnos.objects.all().filter(operador__usuario=request.user , turno_activo = True).values()[0]['casilla_id']
+            operador=turnos.objects.all().filter(operador__usuario=request.user , turno_activo = True).values()[0]['operador_id']
+            DiccTicket={"Numero de ticket ": turno_id, "fecha ": fecha,"hora": hora,"importe": importe, "tipo vehiculo": tipo, "casilla": casilla, "operador": operador}
+            generarQR("QR","http://127.0.0.1:8000/tickets/")
+            generarPDFTicket(turno_id, DiccTicket.items())
+            print(f"Numero de ticket: {turno_id} fecha: {fecha}, hora: {hora}, importe: {importe}, tipo vehiculo: {tipo}, casilla: {casilla}, operador: {operador}")
+            
             tick = ticket(importe=importe, fecha = fecha, hora = hora, tipoVehiculo = tipo, turno = turno)
             print(tick)
             tick.save()
-
+            # ACA VA LA FUNCION
+            
             return HttpResponseRedirect('/tickets/')
 
     # if a GET (or any other method) we'll create a blank form
@@ -161,7 +200,51 @@ def informe(request):
     return render(request, 'AppPeaje/informe.html', {'estaciones':estacions_dict})#list(estacions_dict), 'importes':list(estacions_dict.values())})
 
 
+
+
+
+
+
+
+
+
 def terminar_turno(request):
+    
+    cantidad_emitido = 0
+    tickets = list(ticket.objects.all().filter(turno__operador__usuario = request.user, turno__turno_activo = True))
+    monto_cobrado = 0
+    cantidad_por_categoria = {"Motocicletas":0,
+                              "Automoviles":0,
+                              "2 ejes":0,
+                              "3/4 ejes < 2.10m":0,
+                              "3/4 ejes > 2.10m":0,
+                              "5/6 ejes":0,
+                              "> 6 ejes":0                       
+                              }
+    
+    for i in tickets:
+        cantidad_emitido += 1
+        monto_cobrado += i.importe
+        tipo = i.tipoVehiculo
+        print(tipo)
+        cantidad_por_categoria[str(tipo)] += 1
+        
+        
+        
+        
+    print(f"Cantidad de tickets emitidos: {cantidad_emitido} \n monto total cobrado: {monto_cobrado} \n cantidad por categoria: {cantidad_por_categoria}")        
+    
+    """resultadoQuery = {"cantidadEmitida":cantidad_emitido,
+                      "montoCobrado":monto_cobrado,
+                      "cantidad_vehiculos_por_categoria":cantidad_por_categoria
+                      }"""
+    
+    date = datetime.now()
+    date = date.replace(second=0,microsecond=0)
+    generarPDFTurnos(f"turno_informe{date}",cantidad_emitido,monto_cobrado,cantidad_por_categoria.items(),request.user,date)    
+    
+    
+    
     turnos_activos = turnos.objects.all().filter(turno_activo=True, operador__usuario = request.user)
     try:
         turno = turnos_activos[0]
@@ -171,3 +254,7 @@ def terminar_turno(request):
     except IndexError:
         pass    
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
+

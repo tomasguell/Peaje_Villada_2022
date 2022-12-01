@@ -2,12 +2,19 @@
 {% extends "AppPeaje/base.html" %}
 {% block div_content %}
 {% if activar_form == True %}
+
     
         <h2 class="fs-3"> Registrar nuevo turno</h2>
         <form action="" method="post" class="row row-cols-lg-auto g-3 align-items-center">
         {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit" value="submit" class="btn btn-primary">Submit</button>    
+        {{form.as_table}}
+
+
+        <div id="btn-queja-div">
+            <button type="submit" value="submit" class="btn btn-primary">Submit</button>    
+    
+
+        </div>
             
         </form>
     

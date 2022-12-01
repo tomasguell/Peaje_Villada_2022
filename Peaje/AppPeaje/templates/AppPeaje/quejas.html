@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends "AppPeaje/base_noauth.html" %}
+{% block div_content %}
+
+    <style>
+        textarea{
+            min-width: 100%;
+        }
+        #btn-queja-div{
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+
+        <h2 class="fs-3"> Registrar nueva queja</h2>
+        <form action="" method="post" class="row row-cols-lg-auto g-3 align-items-center">
+            {% csrf_token %}
+            {{formito.as_table}}
+            
+            <div id="btn-queja-div">
+                <button type="submit" value="submit" class="btn btn-primary">Registrar Queja</button>    
+    
+            </div>
+          
+            </form>
+           
+
+  
+{% endblock %}       
+
