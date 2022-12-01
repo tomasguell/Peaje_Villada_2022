@@ -21,8 +21,12 @@ def generarPDF(nombre, data):
 	pdf.output(f"{nombre}.pdf")
 
 def imprimir(archivo):
-	lpr =  subprocess.Popen("/usr/bin/lpr", stdin=subprocess.PIPE)
-	lpr.stdin.write(archivo)
+	try:
+		lpr =  subprocess.Popen("/usr/bin/lpr", stdin=subprocess.PIPE)
+		lpr.stdin.write(archivo)
+	except:
+		import os
+		os.startfile("C:/Users/TestFile.txt", "print")
 
 
 
@@ -45,7 +49,7 @@ def generarPDFTurnos(nombre, cantidad_emitido,monto_cobrado,cantidad_por_categor
 		pdf.cell(200, 10, txt = f"{i}",
 			  ln = 6,	 align = 'C')
         
-	output_path = f"../Informes/{nombre}.pdf"
+	output_path = f"../{nombre}.pdf"
 	pdf.output(output_path)
 	enviarMailInforme("ywjrlngnptcvdelw","peajevillada@gmail.com", "peajevillada@gmail.com",output_path, f"Informe del turno de {nombre}" )
 
@@ -61,7 +65,7 @@ def generarPDFTicket(nombre,diccionario):
 		print(i)
 		pdf.cell(200, 10, txt = f"{i}",
 			  ln = a,	 align = 'C')
-	output_path = f"../Informes/{nombre}.pdf"
+	output_path = f"../{nombre}.pdf"
 	pdf.output(output_path)
 	#enviarMailInforme("ywjrlngnptcvdelw","peajevillada@gmail.com", "peajevillada@gmail.com",output_path, f"Ticket emitido por {nombre}" )
     
