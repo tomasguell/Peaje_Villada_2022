@@ -5,12 +5,11 @@ from .models import turnos, ticket, operadores
 # Create your views here.
 from django.http import HttpResponseRedirect
 
-
-
+#from ...Complementos.generar import generarPDF
 from .models import tipoVehiculo
 from .models import ticket
 from .models import estaciones
-
+from .generar import generarPDF, generarPDFTurnos
 
 
 
@@ -143,6 +142,41 @@ def informe(request):
 
 
 def terminar_turno(request):
+    
+    cantidad_emitido = 0
+    tickets = list(ticket.objects.all().filter(turno__operador__usuario = request.user, turno__turno_activo = True))
+    monto_cobrado = 0
+    cantidad_por_categoria = {"Motocicletas":0,
+                              "Automoviles":0,
+                              "2 ejes":0,
+                              "3/4 ejes < 2.10m":0,
+                              "3/4 ejes > 2.10m":0,
+                              "5/6 ejes":0,
+                              "> 6 ejes":0                       
+                              }
+    
+    for i in tickets:
+        cantidad_emitido += 1
+        monto_cobrado += i.importe
+        tipo = i.tipoVehiculo
+        print(tipo)
+        cantidad_por_categoria[str(tipo)] += 1
+        
+        
+        
+        
+    print(f"Cantidad de tickets emitidos: {cantidad_emitido} \n monto total cobrado: {monto_cobrado} \n cantidad por categoria: {cantidad_por_categoria}")        
+    
+    """resultadoQuery = {"cantidadEmitida":cantidad_emitido,
+                      "montoCobrado":monto_cobrado,
+                      "cantidad_vehiculos_por_categoria":cantidad_por_categoria
+                      }"""
+    
+    
+    generarPDFTurnos(f"turno_informe{datetime.now()}",cantidad_emitido,monto_cobrado,cantidad_por_categoria.items())    
+    
+    
+    
     turnos_activos = turnos.objects.all().filter(turno_activo=True, operador__usuario = request.user)
     try:
         turno = turnos_activos[0]
