@@ -11,21 +11,9 @@ from .models import tipoVehiculo
 from .models import ticket
 from .models import estaciones
 
-
-
-
-
-
-
-
-
 def index(request):
     context = {'key': 'hola'}
     return render(request, 'AppPeaje/dashboard.html', context=context)
-
-def crearTicket(request):
-    return none
-
 
 
 def tickets(request):
@@ -38,11 +26,6 @@ def tickets(request):
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
-            
-
-
-
-
             vehiculo = form.cleaned_data['tipoVehiculo']
 
             importe = tipoVehiculo.objects.get(tipo = vehiculo).precio
@@ -62,7 +45,11 @@ def tickets(request):
             vehiculo_id = list(tipoVehiculo.objects.all().filter( tipo = vehiculo).values())[-1]['id']
             tipo = tipoVehiculo.objects.get(id = vehiculo_id)
             #print('tipo: {}'.format(tipo))
-
+            
+            casilla=turnos.objects.all().filter(operador__usuario=request.user , turno_activo = True).values()[0]['casilla_id']
+            operador=turnos.objects.all().filter(operador__usuario=request.user , turno_activo = True).values()[0]['operador_id']
+            print(f"Numero de ticket: {turno_id} fecha: {fecha}, hora: {hora}, importe: {importe}, tipo vehiculo: {tipo}, casilla: {casilla}, operador: {operador}")
+            
             tick = ticket(importe=importe, fecha = fecha, hora = hora, tipoVehiculo = tipo, turno = turno)
             print(tick)
             tick.save()
