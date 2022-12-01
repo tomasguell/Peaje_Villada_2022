@@ -18,12 +18,41 @@
                 <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
-        {% for item in db %}
-            <div class="input-group mb-3">
-                {{ item }}
-            </div>
-        {% endfor %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Hora</th>
+                    <th scope="col">importe</th>
+                    <th scope="col">tipo de vehiculo</th>
+                    <th scope="col">operador</th>
+                    <th scope="col">casilla</th>
+                    <th scope="col">turno</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for item in db %}
 
+                    <tr>
+                        <th scope="row">{{ item.id }}</th>
+                        <td>{{ item.fecha }}</td>
+                        <td>{{ item.hora }}</td>
+                        <td>{{ item.importe }}</td>
+                        <td>{{ item.tipoVehiculo }}</td>
+                        <td>{{ item.turno.operador.nombre }}</td>
+                        <td>{{ item.turno.casilla.nombre }}</td>
+                        <td>{{ item.turno.HoraPlanificada }}</td>
+                    </tr>
+                    {% endfor %}
+            
+                </tbody>
+            </table>
+            <!--
+            <div class="input-group mb-3">
+                {{ item.tipoVehiculo }}
+            </div>
+            -->
     {% else %}
 
         <h2 class="fs-5"> No hay turnos creados recientemente</h2>
