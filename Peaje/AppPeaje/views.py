@@ -177,8 +177,9 @@ def terminar_turno(request):
                       "cantidad_vehiculos_por_categoria":cantidad_por_categoria
                       }"""
     
-    
-    generarPDFTurnos(f"turno_informe{datetime.now()}",cantidad_emitido,monto_cobrado,cantidad_por_categoria.items())    
+    date = datetime.now()
+    date = date.replace(second=0,microsecond=0)
+    generarPDFTurnos(f"turno_informe{date}",cantidad_emitido,monto_cobrado,cantidad_por_categoria.items(),request.user,date)    
     
     
     
