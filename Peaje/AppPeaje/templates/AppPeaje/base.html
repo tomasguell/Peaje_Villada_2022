@@ -24,7 +24,7 @@
             </div>
             {% if user.is_authenticated %}
                 <ul class="list-unstyled px-2">
-                    <li class="active"><a href="" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-house-door"></i> Dashboard</a></li>
+                    <li class=""><a href="" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-house-door"></i> Dashboard</a></li>
                     <li class=""><a href="../tickets" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-list-ul"></i> Tickets </a></li>
                     <li class=""><a href="../informe" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-chat"></i> Informe</a></li>
                     <li class=""><a href="../turnos" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-envelope-paper"></i> Turnos</a></li>
@@ -43,8 +43,6 @@
                     <li class=""><a href="../quejas" class="text-decoration-none px-3 py-2 d-block"> <i class="bi bi-people"></i> Quejas</a></li>
                 </ul>
             {% endif %}    
-
-
 
             {% if user.is_authenticated %}
             <hr class="h-color mx-3 ">
@@ -133,7 +131,7 @@
         });
 
         $('.open-btn').on('click', function(){
-                $('.sidebar').addClass('active');
+            $('.sidebar').addClass('active');
         });
 
         $('.close-btn').on('click', function(){
