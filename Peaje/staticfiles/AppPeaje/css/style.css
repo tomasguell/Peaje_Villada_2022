@@ -1,0 +1,114 @@
+body{
+    background: #eee;
+}
+
+
+
+.login-form-title{
+    position:static;
+    /*margin-left: 5%;    */
+    background-color: white;
+    margin-top: 3rem;
+    /*margin-right: 5%;*/
+}
+
+
+input{
+    width:100%!important;
+}
+
+
+textarea{
+    min-width: 100%!important;
+}
+
+
+
+#btn-queja-div{
+    margin-top: 10%;
+}
+
+
+
+.login-form{
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 7rem;
+}
+
+#side_nav{
+    background: #000;
+    min-width: 250px;
+    max-width: 250px;
+    transition: all 0.3s;
+}
+
+.content{
+    min-height: 100vh;
+    width: 100%;
+}
+
+hr.h-color{
+    background: #eee;
+}
+
+.sidebar li.active{
+    background: #eee;
+    border-radius: 8px;
+}
+
+.sidebar li.active a, .sidebar li.active a:hover{
+    color: #000;
+}
+
+.sidebar li a{
+    color: #fff;
+}
+
+.login-title{
+    margin-left: center;
+    color:#212529;
+    font-size: 2rem;
+}
+
+
+button {
+    transition-duration: 0.4s;
+    background-color: white;
+    color: black;
+    border: 2px solid #000000; /* Green */
+  }
+  
+button:hover {
+    background-color: #212529; /* Green */
+    color: white;
+  }
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 80%;
+}    
+
+.block {
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: #04AA6D;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+@media(max-width: 767px){
+    #side_nav{
+        margin-left: -250px;
+        position: fixed;
+        min-height: 100vh;
+        z-index: 1;
+    }
+    #side_nav.active{
+        margin-left: 0;
+    }
+}

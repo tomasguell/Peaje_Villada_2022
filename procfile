@@ -1,0 +1,1 @@
+web: gunicorn 'Peaje.wsgi'
